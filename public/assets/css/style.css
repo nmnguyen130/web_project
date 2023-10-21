@@ -1,0 +1,76 @@
+/* Hero Section */
+#hero {
+  height: calc(100vh - 56px);
+  margin-top: 56px;
+  color: var(--white-color);
+}
+
+#heroVideoBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+#hero .container {
+  height: 70vh;
+}
+
+.discover-btn {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.bottom-img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+@media screen and (max-width: 991px) {
+  #hero {
+    padding-top: 5%;
+  }
+}
+
+/* Feature */
+#features {
+  background: var(--background-color);
+}
+
+.feature-icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.75rem;
+  background: var(--primary-color) !important;
+}
+
+/* Gallery */
+#galleries {
+  background: var(--background-color);
+}
+
+.album h1 {
+  color: var(--text-color);
+  filter: drop-shadow(0 2px 0 var(--darker-primary-color));
+  text-shadow: 0 3px 0 var(--darker-primary-color),
+    -2px 0 var(--darker-primary-color), 0 2px var(--darker-primary-color),
+    0 -2px var(--darker-primary-color), -2px -2px var(--darker-primary-color),
+    3px 2px var(--darker-primary-color), -2px 2px var(--darker-primary-color),
+    3px -2px var(--darker-primary-color);
+}
+
+.card img {
+  height: 18rem;
+}
+
+.card {
+  align-items: stretch;
+}
+
+.card .btn:hover {
+  background-color: var(--primary-color);
+}

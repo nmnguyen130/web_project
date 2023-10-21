@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+:root {
+  --primary-color: #128f51;
+  --lighter-primary-color: #4aae70;
+  --darker-primary-color: #0e6c38;
+  --text-color: #fbd85d;
+  --text-form-color: #eee;
+  --white-color: #fff;
+  --dark-color: #333;
+  --border-color: #ced4da;
+  --background-color: #f3fde8;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+header {
+  width: 100%;
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+/* Header */
+.header {
+  background-image: linear-gradient(rgb(220, 220, 220, 0.3), transparent 90%);
+}
+
+.header.active {
+  background: var(--dark-color);
+}
+
+.navbar .navbar-brand .logo {
+  font-size: 1.7rem;
+  padding: 0 0.8rem;
+}
+
+.navbar .navbar-nav .nav-item > a {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.login-signup-btn a {
+  font-size: 1.1rem;
+}
+
+@media screen and (max-width: 991px) {
+  .navbar .navbar-nav .nav-item > a {
+    float: right;
+  }
+}
+
+/* Footer */
+.footer-wave-img {
+  width: 100%;
+}
+
+.footer {
+  padding: 1.5rem;
+}
+
+.footer i {
+  font-size: 1.1rem;
+}
+
+.footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--dark-color);
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  background-color: var(--white-color);
+  color: var(--dark-color);
+  transition: all 0.3s ease;
+}
+
+.footer-socials a:hover {
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.last-footer p {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}

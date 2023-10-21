@@ -1,0 +1,90 @@
+body {
+  background: url("../images/login_background.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-form {
+  color: var(--text-form-color);
+}
+
+.wrapper {
+  width: 500px;
+}
+
+.wrapper .card {
+  max-width: 400px;
+  margin: auto;
+  background: transparent;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  padding: 0.8rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.title-container {
+  position: relative;
+}
+
+.title-container a {
+  position: absolute;
+  left: 0;
+}
+
+.wrapper .card .input-field {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  color: var(--text-form-color);
+  padding: 0.3rem;
+}
+
+.wrapper .card .input-field input {
+  background-color: inherit;
+}
+
+.wrapper .card .input-field input::placeholder {
+  color: var(--text-form-color);
+}
+
+.wrapper .card .input-field input.form-control,
+.wrapper .card .input-field input.form-control:focus {
+  border: none;
+  box-shadow: none;
+  color: var(--text-form-color);
+}
+
+.wrapper .card .input-field button.btn {
+  color: var(--text-form-color);
+  border: none;
+  padding: 0;
+  padding-right: 0.5rem;
+}
+
+.wrapper .card .input-field button.btn:hover {
+  color: var(--white-color);
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--text-form-color);
+}
+
+.btn-social {
+  font-size: 1.1rem;
+}
