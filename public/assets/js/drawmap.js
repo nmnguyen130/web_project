@@ -156,6 +156,7 @@ function setupEventListeners() {
 }
 
 function handleMouseWheel(e) {
+  e.preventDefault();
   const scaleFactor = e.deltaY > 0 ? 1.04 : 0.96;
 
   zoomToCenter(scaleFactor);

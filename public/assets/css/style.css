@@ -53,8 +53,9 @@
   background: var(--background-color);
 }
 
-.album h1 {
+.shadow-text {
   color: var(--text-color);
+  letter-spacing: 1.5px;
   filter: drop-shadow(0 2px 0 var(--darker-primary-color));
   text-shadow: 0 3px 0 var(--darker-primary-color),
     -2px 0 var(--darker-primary-color), 0 2px var(--darker-primary-color),

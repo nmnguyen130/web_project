@@ -10,3 +10,35 @@ header {
   border: 1px solid #ccc;
   display: none;
 }
+
+.bg-image {
+  background: url("https://images.pexels.com/photos/7864982/pexels-photo-7864982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+    no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.infor-img {
+  width: 280px;
+  object-fit: cover;
+  border-radius: 4px;
+  float: right;
+}
+
+.card-img-overlay {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s;
+}
+
+.card-img-overlay:hover {
+  opacity: 1;
+}
+
+.card img {
+  height: 200px;
+}
+
+.custom-btn {
+  width: 40%;
+}
