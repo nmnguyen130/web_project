@@ -3,7 +3,7 @@
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
     // Database Config
     define('DB_HOST', 'localhost');
-    define('DB_NAME', 'biological_province');
+    define('DB_NAME', 'biomap');
     define('DB_USER', 'root');
     define('DB_PASS', '');
 
