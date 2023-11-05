@@ -170,7 +170,6 @@ function handleMouseDown(e) {
 
 function handleMouseMove(e) {
   if (isDragging) {
-    console.log(dragSpeed);
     const deltaX = (e.clientX - startMouseX) * dragSpeed;
     const deltaY = (e.clientY - startMouseY) * dragSpeed;
     const newX = startViewBox[0] - deltaX;

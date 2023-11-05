@@ -26,10 +26,6 @@ body {
   padding: 0.8rem;
 }
 
-.hidden {
-  display: none;
-}
-
 .title-container {
   position: relative;
 }
@@ -61,14 +57,14 @@ body {
   color: var(--text-form-color);
 }
 
-.wrapper .card .input-field button.btn {
+.wrapper .card .input-field span.btn {
   color: var(--text-form-color);
   border: none;
   padding: 0;
   padding-right: 0.5rem;
 }
 
-.wrapper .card .input-field button.btn:hover {
+.wrapper .card .input-field span.btn:hover {
   color: var(--white-color);
 }
 

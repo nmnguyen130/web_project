@@ -30,20 +30,4 @@ document.addEventListener("DOMContentLoaded", () => {
     passwordField.addEventListener("input", checkInputValue);
     checkInputValue();
   });
-
-  // Change the login form or signup form
-  const loginBtn = document.getElementById("btn-login");
-  const signupBtn = document.getElementById("btn-signup");
-  const loginForm = document.getElementById("login-form");
-  const signupForm = document.getElementById("signup-form");
-
-  signupBtn.addEventListener("click", () => {
-    loginForm.classList.add("hidden");
-    signupForm.classList.remove("hidden");
-  });
-
-  loginBtn.addEventListener("click", () => {
-    signupForm.classList.add("hidden");
-    loginForm.classList.remove("hidden");
-  });
 });

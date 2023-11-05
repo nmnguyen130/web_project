@@ -16,7 +16,8 @@ class User
         'username',
         'email',
         'role',
-        'password'
+        'password',
+        'date_created'
     ];
 
     /*****************************
@@ -85,6 +86,8 @@ class User
             $data['date_created'] = date("Y-m-d H:i:s");
 
             $this->insert($data);
+
+            message("Your account was created! Please login to continue");
             redirect('login');
         }
     }

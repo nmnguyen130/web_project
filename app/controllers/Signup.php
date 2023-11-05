@@ -4,20 +4,20 @@ namespace Controller;
 
 defined('ROOTPATH') or exit('Access Denied!');
 
-class Login
+class Signup
 {
     use MainController;
 
     public function index()
     {
-        $data['title'] = 'Login';
+        $data['title'] = 'Signup';
 
         $data['user'] = new \Model\User;
         $req = new \Core\Request;
         if ($req->posted()) {
-            $data['user']->login($_POST);
+            $data['user']->signup($_POST);
         }
 
-        $this->view('login', $data);
+        $this->view('signup', $data);
     }
 }

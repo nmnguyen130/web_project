@@ -10,12 +10,14 @@ class Test
 
     public function index()
     {
-        $province = new \Province();
-        $name = "Đà Nẵng";
+        // $user = new \Model\User;
+        // $data['username'] = 'Admin';
+        // $data['email'] = 'admin@gmail.com';
+        // $data['role'] = 'admin';
+        // $data['password'] = password_hash('password', PASSWORD_DEFAULT);
+        // $data['date_created'] = date("Y-m-d H:i:s");
 
-        $result = $province->getAnimalOfProvince($name);
-
-        show($result);
+        // $user->insert($data);
 
         $this->view('test');
     }

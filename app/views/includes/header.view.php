@@ -30,12 +30,12 @@
                     <?php if ($ses->is_logged_in()) : ?>
                         <div class="dropdown d-flex flex-column flex-lg-row justify-content-end align-items-end py-2 mx-sm-2">
                             <a class="user-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Hi, User
+                                Hi, <?= $ses->user('username') ?>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item py-0" href="<?= ROOT ?>/profile">Profile</a></li>
 
-                                <?php if ($ses->user('role' == 'admin')) : ?>
+                                <?php if ($ses->user('role') == 'admin') : ?>
                                     <li><a class="dropdown-item py-0" href="<?= ROOT ?>/admin">Admin</a></li>
                                 <?php endif; ?>
 
@@ -48,7 +48,7 @@
                     <?php else : ?>
                         <div class="login-signup-btn d-flex flex-column flex-lg-row justify-content-end align-items-end gap-3 py-2 mx-sm-2">
                             <a href="<?= ROOT ?>/login" class="btn btn-outline-light px-3 py-1 rounded-4">Login</a>
-                            <a href="<?= ROOT ?>/login" class="btn btn-warning px-3 py-1 rounded-4">Sign up</a>
+                            <a href="<?= ROOT ?>/signup" class="btn btn-warning px-3 py-1 rounded-4">Sign up</a>
                         </div>
                     <?php endif; ?>
                 </div>
