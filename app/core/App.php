@@ -1,9 +1,11 @@
 <?php
 
+defined('ROOTPATH') or exit('Access Denied!');
+
 class App
 {
     private $controller = 'Home';
-    private $method = 'index';
+    private $method     = 'index';
 
     private function splitURL()
     {
@@ -29,7 +31,7 @@ class App
             $this->controller = "_404";
         }
 
-        $controller = new $this->controller;
+        $controller = new ('\Controller\\' . $this->controller);
 
         // Select Method
         if (!empty($URL[1])) {

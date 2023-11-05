@@ -1,11 +1,17 @@
 <?php
 
+namespace Controller;
+
+defined('ROOTPATH') or exit('Access Denied!');
+
 class Home
 {
-    use Controller;
+    use MainController;
 
     public function index()
     {
-        $this->view('home');
+        $data['title'] = 'Home';
+
+        $this->view('home', $data);
     }
 }

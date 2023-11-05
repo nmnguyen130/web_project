@@ -1,11 +1,8 @@
-<?php
-require_once "import.php";
-?>
+<?php $this->view('includes/import', $data) ?>
+
 <link rel="stylesheet" href="<?= ROOT ?>/assets/css/style.css">
 
-<?php
-require_once "header.php";
-?>
+<?php $this->view('includes/header', $data) ?>
 
 <main>
     <!-- Hero Section -->
@@ -216,6 +213,4 @@ require_once "header.php";
     </section>
 </main>
 
-<?php
-require_once 'footer.php';
-?>
+<?php $this->view('includes/footer', $data) ?>

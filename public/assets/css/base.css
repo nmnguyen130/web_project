@@ -69,6 +69,12 @@ li {
   font-weight: 500;
 }
 
+.user-btn {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--white-color);
+}
+
 .login-signup-btn a {
   font-size: 1.1rem;
 }

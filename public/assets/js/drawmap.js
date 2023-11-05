@@ -7,8 +7,8 @@ const viewHeight = mapInfo.initial_view.y2;
 
 const aspectRatio = viewHeight / viewWidth;
 
-const mapContainer = document.getElementById("map");
-const windowWidth = mapContainer.clientWidth;
+const mapContainer = $("#map");
+const windowWidth = mapContainer.width();
 const windowHeight = window.innerHeight;
 
 var zoomScale = 1;
@@ -24,19 +24,17 @@ paper.setViewBox(
 );
 
 // Show infobox when hover on the province
-const infoBox = document.getElementById("info-box");
+const infoBox = $("#info-box");
 
-// Function to display information when hovering over a path
 function showInfo(x, y, regionName) {
-  infoBox.style.left = x + "px";
-  infoBox.style.top = y + "px";
-  infoBox.innerHTML = regionName;
-  infoBox.style.display = "block";
+  infoBox.css({ left: x + "px", top: y + "px" });
+  infoBox.html(regionName);
+  infoBox.css("display", "block");
 }
 
 // Function to hide the info box when not hovering
 function hideInfo() {
-  infoBox.style.display = "none";
+  infoBox.css("display", "none");
 }
 
 // Function to create and style a path element

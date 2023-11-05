@@ -1,5 +1,7 @@
 <?php
 
+defined('ROOTPATH') or exit('Access Denied!');
+
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
     // Database Config
     define('DB_HOST', 'localhost');
@@ -7,10 +9,10 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
     define('DB_USER', 'root');
     define('DB_PASS', '');
 
-    define('ROOT', 'http://localhost/web_project/public');
+    define('ROOT', 'http://localhost/biomap/public');
 }
 
-define('APP_NAME', 'Web_Project');
+define('APP_NAME', 'Biomap');
 define('APP_DESC', 'Website about creatures in Vietnam');
 
 // True mean show errors

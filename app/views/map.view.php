@@ -111,7 +111,9 @@ require_once "import.php";
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="<?= ROOT ?>/assets/js/raphael.min.js"></script>
+<script src="<?= ROOT ?>/assets/js/libs/raphael.min.js"></script>
+<script src="<?= ROOT ?>/assets/js/libs/jquery-3.7.1.min.js"></script>
+
 <script src="<?= ROOT ?>/assets/js/mapdata.js"></script>
 <script src="<?= ROOT ?>/assets/js/countrymap.js"></script>
 

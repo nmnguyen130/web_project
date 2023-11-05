@@ -1,12 +1,16 @@
 <?php
 
+namespace Controller;
+
+defined('ROOTPATH') or exit('Access Denied!');
+
 class Test
 {
-    use Controller;
+    use MainController;
 
     public function index()
     {
-        $province = new Province();
+        $province = new \Province();
         $name = "Đà Nẵng";
 
         $result = $province->getAnimalOfProvince($name);

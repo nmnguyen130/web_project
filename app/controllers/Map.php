@@ -1,8 +1,12 @@
 <?php
 
+namespace Controller;
+
+defined('ROOTPATH') or exit('Access Denied!');
+
 class Map
 {
-    use Controller;
+    use MainController;
 
     public function index()
     {
