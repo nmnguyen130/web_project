@@ -64,6 +64,9 @@ function createPath(pathData, pathKey) {
   });
 
   path.click(() => {
+    var provinceName = mapInfo.names[pathKey];
+    sendData(provinceName);
+
     const bbox = path.getBBox();
     zoomToRegion(bbox.x, bbox.y, bbox.width, bbox.height);
   });
@@ -193,7 +196,7 @@ function initializeMap() {
 
 // Resize the svg map
 function updateSVGSize() {
-  const newWindowWidth = mapContainer.clientWidth;
+  const newWindowWidth = mapContainer.width();
 
   paper.setSize(newWindowWidth, windowHeight);
 }

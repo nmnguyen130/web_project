@@ -193,10 +193,10 @@ trait Model
                             if (!preg_match("/^[a-zA-Z\-\_\$\%\*\[\]\(\)\& ]+$/", trim($data[$column])))
                                 $this->errors[$column] = ucfirst($column) . " should only have aphabetical letters & spaces";
                             break;
-                        case 'not_less_than_8_chars':
+                        case 'not_less_than_6_chars':
 
-                            if (strlen(trim($data[$column])) < 8)
-                                $this->errors[$column] = ucfirst($column) . " should not be less than 8 characters";
+                            if (strlen(trim($data[$column])) < 6)
+                                $this->errors[$column] = ucfirst($column) . " should not be less than 6 characters";
                             break;
                         case 'unique':
 

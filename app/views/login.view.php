@@ -18,7 +18,7 @@
 
 				<div class="d-flex align-items-center input-field mt-3">
 					<i class="fa-regular fa-user p-2"></i>
-					<input type="text" value="<?= old_value('email') ?>" name="email" placeholder="Username" class="form-control">
+					<input type="text" value="<?= old_value('email') ?>" name="email" placeholder="Email" class="form-control">
 				</div>
 				<div class="my-2"><small class="text-danger"><?= $user->getError('email') ?></small></div>
 

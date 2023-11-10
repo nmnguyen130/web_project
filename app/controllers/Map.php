@@ -10,6 +10,8 @@ class Map
 
     public function index()
     {
-        $this->view('map');
+        $data['title'] = 'Map';
+
+        $this->view('map', $data);
     }
 }

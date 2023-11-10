@@ -226,7 +226,7 @@ var simplemaps_countrymap_mapinfo = {
     VNM498: "An Giang",
     VNM499: "Cần Thơ",
     VNM475: "Nghệ An",
-    VNM490: "Thừa Thiên - Huế",
+    VNM490: "Thừa Thiên Huế",
     VNM491: "Đà Nẵng",
     VNM496: "Bình Thuận",
     VNM497: "Đồng Nai",

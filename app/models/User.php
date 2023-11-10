@@ -28,7 +28,7 @@ class User
 		numeric
 		unique
 		symbol
-		longer_than_8_chars
+		longer_than_6_chars
 		alpha_numeric_symbol
 		alpha_numeric
 		alpha_symbol
@@ -36,7 +36,6 @@ class User
      ****************************/
 
     protected $onInsertValidationRules = [
-
         'email' => [
             'email',
             'unique',
@@ -51,13 +50,12 @@ class User
             'required',
         ],
         'password' => [
-            'not_less_than_8_chars',
+            'not_less_than_6_chars',
             'required',
         ],
     ];
 
     protected $onUpdateValidationRules = [
-
         'email' => [
             'email',
             'unique',
@@ -72,7 +70,7 @@ class User
             'required',
         ],
         'password' => [
-            'not_less_than_8_chars',
+            'not_less_than_6_chars',
             'required',
         ],
     ];

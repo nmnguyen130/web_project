@@ -200,7 +200,7 @@ var simplemaps_countrymap_mapdata = {
       name: "Quảng Trị",
     },
     VNM490: {
-      name: "Thừa Thiên - Huế",
+      name: "Thừa Thiên Huế",
     },
     VNM491: {
       name: "Đà Nẵng",

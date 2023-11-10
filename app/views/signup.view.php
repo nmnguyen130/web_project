@@ -33,7 +33,7 @@
 				</div>
 				<div class="my-2"><small class="text-danger"><?= $user->getError('password') ?></small></div>
 
-				<button type="button" class="btn btn-primary mb-3">Signup</button>
+				<button class="btn btn-primary mb-3">Signup</button>
 
 				<div class="d-flex justify-content-center">
 					<p class="small fw-bold mt-1 mb-0 text-form">

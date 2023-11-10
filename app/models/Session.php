@@ -34,7 +34,6 @@ class Session
 
 				$_SESSION[$this->mainkey][$key] = $value;
 			}
-
 			return 1;
 		}
 
