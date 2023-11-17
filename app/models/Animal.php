@@ -21,7 +21,7 @@ class Animal
         'habitat'
     ];
 
-    public function getAllProvince($scientific_name)
+    public function getAllProvinceHasAnimal($scientific_name)
     {
         $query = "SELECT DISTINCT name FROM province
         WHERE JSON_CONTAINS(animal_list, JSON_ARRAY(:scientific_name), '$')";

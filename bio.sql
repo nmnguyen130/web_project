@@ -13,6 +13,21 @@ CREATE TABLE user (
     date_created DATETIME
 );
 
+CREATE TABLE form (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    type ENUM('animal', 'plant') NOT NULL,
+    scientific_name VARCHAR(255),
+    name NVARCHAR(255) NOT NULL,
+    image_url VARCHAR(255),
+    characteristic TEXT,
+    behavior TEXT,
+    habitat TEXT,
+    submission_date DATETIME,
+    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 CREATE TABLE region (
     region_id INT AUTO_INCREMENT PRIMARY KEY,
     name NVARCHAR(255) NOT NULL,
@@ -118,12 +133,16 @@ FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
 (scientific_name, name, image_url, red_list, characteristic, behavior, habitat);
 
-SELECT DISTINCT name FROM province
-        WHERE JSON_CONTAINS(animal_list, JSON_ARRAY("Bungarus candidus"), '$')
+LOAD DATA INFILE 'D:/biomap_plants.csv' INTO TABLE plant
+FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(scientific_name, name, image_url, red_list, characteristic, habitat);
 
 -- SELECT * FROM user;
+-- SELECT * FROM form;
 -- SELECT * FROM region;
 -- SELECT * FROM province;
 -- SELECT * FROM animal;
 -- SELECT * FROM plant;
--- SELECT * FROM red_list;
+-- SELECT * FROM red_list_animal;
+-- SELECT * FROM red_list_plant;

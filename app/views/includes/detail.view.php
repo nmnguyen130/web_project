@@ -26,6 +26,6 @@
     <button class="btn btn-primary w-50 m-auto mb-1" id="more-btn">Hiển thị thêm</button>
 </div>
 <div class="d-flex justify-content-center btn-container hidden">
-    <div class="btn btn-secondary mx-2 my-2 custom-btn">Động Vật</div>
-    <div class="btn btn-primary mx-2 my-2 custom-btn">Thực Vật</div>
+    <button class="btn btn-secondary mx-2 my-2 custom-btn">Động Vật</button>
+    <button class="btn btn-primary mx-2 my-2 custom-btn">Thực Vật</button>
 </div>

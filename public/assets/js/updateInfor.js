@@ -11,13 +11,15 @@ function sendData(provinceName) {
   if (currentAjaxRequest) {
     currentAjaxRequest.abort();
   }
+  console.log(root + "/ajax");
 
   currentAjaxRequest = $.ajax({
     url: root + "/ajax",
     method: "POST",
     data: {
       provinceName: provinceName,
-      type: "getCreatureOfProvince",
+      functionType: "getCreatureOfProvince",
+      creatureType: "plant",
     },
     success: function (response) {
       $(".text-show").addClass("hidden");
@@ -25,7 +27,7 @@ function sendData(provinceName) {
       $(".btn-container").removeClass("hidden");
       btnMore.addClass("hidden");
 
-      var creatureInfo = response.animal_info;
+      var creatureInfo = response.creature_info;
       currentCreature = {
         image_url: creatureInfo.image_url,
         name: creatureInfo.name,
@@ -47,7 +49,7 @@ function sendData(provinceName) {
       $("#habitat").html("<b>Môi trường sống: </b>" + creatureInfo.habitat);
 
       // Update Province has Animal
-      var provinceHasAnimal = response.animal_province;
+      var provinceHasAnimal = response.creature_province;
 
       var provinceListHTML = "<b>Có thể tìm thấy ở: </b>";
       for (var i = 0; i < provinceHasAnimal.length; i++) {
@@ -73,7 +75,7 @@ function sendData(provinceName) {
       // Add others animal of current province
       $("#list-title").text("Những sinh vật khác thuộc " + provinceName + ":");
 
-      creatureList = response.animal_list;
+      creatureList = response.creature_list;
       creatureContainer.empty();
 
       listNumberMax = creatureList.length;
@@ -137,7 +139,7 @@ function getDetailCreature(scientific_name) {
       // Add the current creature into card
       createCreatureCard(currentCreature, creatureContainer);
 
-      var creatureInfo = response.animal_detail;
+      var creatureInfo = response.creature_detail;
 
       currentCreature = {
         image_url: creatureInfo.image_url,
@@ -171,3 +173,5 @@ btnMore.click(() => {
 
   btnMore.addClass("hidden");
 });
+
+// Button change Animal OR Plant
