@@ -13,6 +13,8 @@ const windowHeight = window.innerHeight;
 
 var zoomScale = 1;
 
+const paths = [];
+
 // Set the Raphael paper for drawing the map
 var paper = Raphael("map", windowWidth, windowHeight);
 paper.setViewBox(
@@ -70,6 +72,8 @@ function createPath(pathData, pathKey) {
     const bbox = path.getBBox();
     zoomToRegion(bbox.x, bbox.y, bbox.width, bbox.height);
   });
+
+  path.data("key", pathKey);
 
   return path;
 }
@@ -190,7 +194,8 @@ function handleMouseUp(e) {
 function initializeMap() {
   for (const pathKey in mapInfo.paths) {
     const pathData = mapInfo.paths[pathKey];
-    createPath(pathData, pathKey);
+    const path = createPath(pathData, pathKey);
+    paths.push(path);
   }
 }
 
@@ -206,3 +211,13 @@ window.addEventListener("resize", updateSVGSize);
 initializeMap();
 setupEventListeners();
 updateSVGSize();
+
+// Show province on map when click in a province list
+function zoomToProvince(provinceName) {
+  const path = paths.find(
+    (path) => mapInfo.names[path.data("key")] === provinceName
+  );
+
+  const bbox = path.getBBox();
+  zoomToRegion(bbox.x, bbox.y, bbox.width, bbox.height);
+}

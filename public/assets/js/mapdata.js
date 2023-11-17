@@ -146,7 +146,7 @@ var simplemaps_countrymap_mapdata = {
       name: "Thái Bình",
     },
     VNM474: {
-      name: "Hà Tỉnh",
+      name: "Hà Tĩnh",
     },
     VNM475: {
       name: "Nghệ An",
@@ -155,7 +155,7 @@ var simplemaps_countrymap_mapdata = {
       name: "Quảng Bình",
     },
     VNM477: {
-      name: "Dắk Lắk",
+      name: "Đắk Lắk",
     },
     VNM478: {
       name: "Gia Lai",
@@ -206,7 +206,7 @@ var simplemaps_countrymap_mapdata = {
       name: "Đà Nẵng",
     },
     VNM495: {
-      name: "Bà Rịa - Vũng Tàu",
+      name: "Bà Rịa – Vũng Tàu",
     },
     VNM496: {
       name: "Bình Thuận",
@@ -224,7 +224,7 @@ var simplemaps_countrymap_mapdata = {
       name: "Đồng Tháp",
     },
     VNM501: {
-      name: "Hồ Chí Minh city",
+      name: "TP Hồ Chí Minh",
     },
     VNM502: {
       name: "Kiên Giang",

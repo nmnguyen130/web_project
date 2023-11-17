@@ -2,6 +2,10 @@ header {
   background: rgba(0, 0, 0, 0.1);
 }
 
+.hidden {
+  display: none !important;
+}
+
 #info-box {
   position: absolute;
   background: white;
@@ -37,8 +41,18 @@ header {
 
 .card img {
   height: 200px;
+  object-fit: cover;
 }
 
 .custom-btn {
   width: 40%;
+}
+
+#province_list a {
+  color: var(--dark-color);
+}
+
+#province_list a:hover {
+  color: var(--lighter-primary-color);
+  text-decoration: underline;
 }

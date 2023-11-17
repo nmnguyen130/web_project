@@ -30,4 +30,13 @@ class Animal
 
         return $this->query($query, $data);
     }
+
+    public function getAnimalByName($scientific_name)
+    {
+        $query = "SELECT * FROM $this->table WHERE scientific_name = :scientific_name";
+
+        $data = array(':scientific_name' => $scientific_name);
+
+        return $this->query($query, $data);
+    }
 }

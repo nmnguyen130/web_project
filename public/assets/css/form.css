@@ -1,0 +1,79 @@
+.header {
+  background-color: var(--dark-color);
+}
+
+.form-container {
+  margin-top: 56px;
+}
+
+#creature-type {
+  width: 14rem;
+  font-size: 1.1rem;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+#creature-type label {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+  background-color: var(--lighter-primary-color);
+  color: #fff;
+  border-color: var(--darker-primary-color);
+}
+
+/* Form */
+.fill-in {
+  position: relative;
+}
+
+.fill-in input,
+.fill-in textarea {
+  display: block;
+  font-size: 14px;
+  padding: 10px;
+  width: 100%;
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  resize: vertical;
+}
+
+.fill-in input:focus,
+.fill-in textarea:focus {
+  outline: none;
+}
+
+.fill-in label {
+  position: absolute;
+  top: 10px;
+  color: #999;
+  padding-left: 18px;
+  pointer-events: none;
+  transition: 0.2s ease all;
+}
+
+.fill-in input:focus ~ label,
+.fill-in textarea:focus ~ label,
+.fill-in textarea:valid ~ label,
+.fill-in input:not(:placeholder-shown) ~ label {
+  padding: 0 10px;
+  top: -4px;
+  left: 22px;
+  transform: translateX(10px) translateY(-7px);
+  color: var(--primary-color);
+  background-color: var(--white-color);
+  border-left: 1px solid var(--primary-color);
+  border-right: 1px solid var(--primary-color);
+}
+
+/* textarea scrollbar */
+textarea::-webkit-scrollbar-track {
+  display: none;
+}

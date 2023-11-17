@@ -1,0 +1,7 @@
+header {
+  background-color: var(--dark-color);
+}
+
+.user-container {
+  background: var(--primary-color);
+}

@@ -23,7 +23,7 @@
                             <a class="nav-link active" aria-current="page" href="<?= ROOT ?>/home">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="<?= ROOT ?>/services">Services</a>
+                            <a class="nav-link" href="<?= ROOT ?>/form" onclick="return checkLogin()">Contribute</a>
                         </li>
                     </ul>
 
@@ -55,3 +55,22 @@
             </div>
         </nav>
     </header>
+
+    <?php if (!$ses->is_logged_in()) : ?>
+        <?php
+        $data['popup_title'] = "Vui lòng đăng nhập";
+        $data['popup_body'] = "Bạn cần tài khoản để sử dụng chức năng này.";
+        $this->view('includes/popup', $data);
+        ?>
+    <?php endif; ?>
+
+    <script>
+        function checkLogin() {
+            <?php if ($ses->is_logged_in()) { ?>
+                return true;
+            <?php } else { ?>
+                openPopup();
+                return false;
+            <?php } ?>
+        }
+    </script>
