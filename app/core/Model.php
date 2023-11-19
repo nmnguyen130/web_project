@@ -141,11 +141,13 @@ trait Model
 
     public function validate($data)
     {
+
         $this->errors = [];
 
         if (!empty($this->primaryKey) && !empty($data[$this->primaryKey])) {
             $validationRules = $this->onUpdateValidationRules;
         } else {
+
             $validationRules = $this->onInsertValidationRules;
         }
 
@@ -185,19 +187,21 @@ trait Model
                             break;
                         case 'alpha_numeric_symbol':
 
-                            if (!preg_match("/^[a-zA-Z0-9\-\_\$\%\*\[\]\(\)\& ]+$/", trim($data[$column])))
+                            if (!preg_match("/^[a-zA-Z0-9\-\_\$\%\*\[\]\(\)\&\!\.\, ]+$/", trim($data[$column])))
                                 $this->errors[$column] = ucfirst($column) . " should only have aphabetical letters & spaces";
                             break;
                         case 'alpha_symbol':
 
-                            if (!preg_match("/^[a-zA-Z\-\_\$\%\*\[\]\(\)\& ]+$/", trim($data[$column])))
+                            if (!preg_match("/^[a-zA-Z\-\_\$\%\*\[\]\(\)\&\!\.\, ]+$/", trim($data[$column])))
                                 $this->errors[$column] = ucfirst($column) . " should only have aphabetical letters & spaces";
                             break;
-                        case 'not_less_than_6_chars':
 
-                            if (strlen(trim($data[$column])) < 6)
-                                $this->errors[$column] = ucfirst($column) . " should not be less than 6 characters";
+                        case 'not_less_than_8_chars':
+
+                            if (strlen(trim($data[$column])) < 8)
+                                $this->errors[$column] = ucfirst($column) . " should not be less than 8 characters";
                             break;
+
                         case 'unique':
 
                             $key = $this->getPrimaryKey();
@@ -213,6 +217,7 @@ trait Model
                                 }
                             }
                             break;
+
                         default:
                             $this->errors['rules'] = "The rule " . $rule . " was not found!";
                             break;

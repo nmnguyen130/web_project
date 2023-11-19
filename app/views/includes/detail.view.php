@@ -9,7 +9,7 @@
     <div>
         <div>
             <img src="" class="infor-img m-2" id="image" alt="image" />
-            <h5 class="px-4 my-3" id="name"></h5>
+            <h5 class="px-4 my-3 text-break" id="name"></h5>
             <p class="px-4" id="characteristic"></p>
             <p class="px-4" id="behavior"></p>
             <p class="px-4" id="habitat"></p>

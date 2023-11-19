@@ -8,7 +8,7 @@ body {
 }
 
 .text-form {
-  color: var(--text-form-color);
+  color: var(--grey-color);
 }
 
 .wrapper {
@@ -38,7 +38,7 @@ body {
 .wrapper .card .input-field {
   border: 1px solid var(--border-color);
   border-radius: 5px;
-  color: var(--text-form-color);
+  color: var(--grey-color);
   padding: 0.3rem;
 }
 
@@ -47,18 +47,18 @@ body {
 }
 
 .wrapper .card .input-field input::placeholder {
-  color: var(--text-form-color);
+  color: var(--grey-color);
 }
 
 .wrapper .card .input-field input.form-control,
 .wrapper .card .input-field input.form-control:focus {
   border: none;
   box-shadow: none;
-  color: var(--text-form-color);
+  color: var(--grey-color);
 }
 
 .wrapper .card .input-field span.btn {
-  color: var(--text-form-color);
+  color: var(--grey-color);
   border: none;
   padding: 0;
   padding-right: 0.5rem;
@@ -78,7 +78,7 @@ body {
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--text-form-color);
+  background: var(--grey-color);
 }
 
 .btn-social {

@@ -15,6 +15,12 @@ header {
   display: none;
 }
 
+.map-bg {
+  background: url(https://g2.by/h6ye) no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 .bg-image {
   background: url("https://images.pexels.com/photos/7864982/pexels-photo-7864982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
     no-repeat;
@@ -55,4 +61,10 @@ header {
 #province_list a:hover {
   color: var(--lighter-primary-color);
   text-decoration: underline;
+}
+
+@media screen and (max-width: 767px) {
+  .position-fixed {
+    position: static !important;
+  }
 }

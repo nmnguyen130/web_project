@@ -3,12 +3,12 @@
 <link rel="stylesheet" href="<?= ROOT ?>/assets/css/map.css">
 
 <div class="container-fluid">
-    <div class="row vh-100">
-        <div class="col-5 bg-primary-subtle position-fixed">
-            <div id="map"></div>
+    <div class="row justify-content-center justify-content-md-start vh-100">
+        <div class="col-10 col-md-5 bg-primary-subtle position-fixed">
+            <div id="map" class="map-bg"></div>
             <div id="info-box"></div>
         </div>
-        <div class="col-7 bg-image offset-5">
+        <div class="col-12 col-md-7 bg-image offset-0 offset-md-5">
             <?php $this->view('includes/detail', $data) ?>
         </div>
     </div>
@@ -24,7 +24,7 @@
 <script src="<?= ROOT ?>/assets/js/drawmap.js"></script>
 <script src="<?= ROOT ?>/assets/js/updateInfor.js"></script>
 <script>
-    const root = '<?= ROOT ?>';
+    const root = "<?= ROOT ?>";
 </script>
 </body>
 

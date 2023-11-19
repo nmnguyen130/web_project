@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+:root {
+  --primary-color: #128f51;
+  --lighter-primary-color: #4aae70;
+  --darker-primary-color: #0e6c38;
+  --text-color: #fbd85d;
+  --white-color: #fff;
+  --dark-color: #333;
+  --grey-color: #eee;
+  --border-color: #ced4da;
+  --background-color: #f3fde8;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+header {
+  width: 100%;
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+header nav {
+  height: 56px;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  background-image: linear-gradient(
+    19deg,
+    var(--lighter-primary-color) 0%,
+    var(--darker-primary-color) 100%
+  );
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--dark-color);
+}

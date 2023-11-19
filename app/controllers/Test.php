@@ -18,6 +18,7 @@ class Test
         // $data['date_created'] = date("Y-m-d H:i:s");
 
         // $user->insert($data);
+
         $data['title'] = 'Test';
 
         $this->view('test', $data);

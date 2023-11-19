@@ -1,6 +1,6 @@
 <?php $this->view('includes/import', $data) ?>
 
-<link rel="stylesheet" href="<?= ROOT ?>/assets/css/style.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/css/home.css">
 
 <?php $this->view('includes/header', $data) ?>
 

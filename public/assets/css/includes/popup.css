@@ -1,0 +1,14 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -20%) scale(0.1);
+  min-width: 400px;
+  visibility: hidden;
+  transition: transform 0.4s;
+}
+
+.popup {
+  visibility: visible;
+  transform: translate(-50%, -20%) scale(1);
+}

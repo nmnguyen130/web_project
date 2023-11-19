@@ -1,177 +1,173 @@
-var currentAjaxRequest;
+let currentAjaxRequest;
 
 const btnMore = $("#more-btn");
-var listNumber = 6;
-var creatureList;
-var listNumberMax;
-var currentCreature = {};
-var creatureContainer = $("#creature-list").empty();
+const creatureContainer = $("#creature-list").empty();
+let type = "animal";
+let provinceName;
 
-function sendData(provinceName) {
+let listNumber = 6;
+let creatureList = [];
+let listNumberMax;
+let currentCreature = {};
+
+const sendData = (province, creatureType = type) => {
   if (currentAjaxRequest) {
     currentAjaxRequest.abort();
   }
-  console.log(root + "/ajax");
 
   currentAjaxRequest = $.ajax({
     url: root + "/ajax",
     method: "POST",
     data: {
-      provinceName: provinceName,
+      provinceName: province,
       functionType: "getCreatureOfProvince",
-      creatureType: "plant",
+      creatureType,
     },
-    success: function (response) {
+    success: (response) => {
       $(".text-show").addClass("hidden");
-      $(".card").removeClass("hidden");
-      $(".btn-container").removeClass("hidden");
+      $(".card, .btn-container").removeClass("hidden");
       btnMore.addClass("hidden");
 
-      var creatureInfo = response.creature_info;
-      currentCreature = {
-        image_url: creatureInfo.image_url,
-        name: creatureInfo.name,
-        scientific_name: creatureInfo.scientific_name,
-      };
+      provinceName = province;
 
-      $("#image").attr("src", creatureInfo.image_url);
-      $("#province_name").text(provinceName);
-      $("#name").text(
-        creatureInfo.name +
-          " (tên khoa học: " +
-          creatureInfo.scientific_name +
-          ")"
-      );
-      $("#characteristic").html(
-        "<b>Đặc điểm: </b>" + creatureInfo.characteristic
-      );
-      $("#behavior").html("<b>Tập tính: </b>" + creatureInfo.behavior);
-      $("#habitat").html("<b>Môi trường sống: </b>" + creatureInfo.habitat);
+      updateCreatureInformation(response.creature_info);
+      updateProvinceList(response.creature_province);
 
-      // Update Province has Animal
-      var provinceHasAnimal = response.creature_province;
-
-      var provinceListHTML = "<b>Có thể tìm thấy ở: </b>";
-      for (var i = 0; i < provinceHasAnimal.length; i++) {
-        provinceListHTML +=
-          "<a href='#' class='province-link'>" +
-          provinceHasAnimal[i].name +
-          "</a>";
-        if (i < provinceHasAnimal.length - 1) {
-          provinceListHTML += ", ";
-        }
-      }
-      $("#province_list").html(provinceListHTML);
-
-      $("#province_list")
-        .off("click", ".province-link")
-        .on("click", ".province-link", function (e) {
-          var provinceValue = $(this).text();
-
-          zoomToProvince(provinceValue);
-          sendData(provinceValue);
-        });
-
-      // Add others animal of current province
-      $("#list-title").text("Những sinh vật khác thuộc " + provinceName + ":");
-
-      creatureList = response.creature_list;
-      creatureContainer.empty();
-
-      listNumberMax = creatureList.length;
-      listNumber = 6;
-      listNumber = listNumberMax > listNumber ? listNumber : listNumberMax;
-
-      for (var i = 0; i < listNumber; i++) {
-        createCreatureCard(creatureList[i], creatureContainer);
-      }
-
-      if (listNumberMax > listNumber) {
-        btnMore.removeClass("hidden");
-      }
+      listTitle = creatureType === "animal" ? "động vật" : "thực vật";
+      $("#list-title").text(`Những ${listTitle} khác thuộc ${provinceName}:`);
+      updateCreatureList(response.creature_list);
     },
-    complete: function () {
+    complete: () => {
       currentAjaxRequest = null;
     },
   });
-}
+};
 
-function createCreatureCard(creature, creatureContainer) {
-  var colDiv = $("<div>").addClass("col");
+const getDetailCreature = (scientific_name, creatureType = type) => {
+  if (currentAjaxRequest) {
+    currentAjaxRequest.abort();
+  }
 
-  var cardDiv = $("<div>").addClass("card bg-dark text-white");
-  var img = $("<img>")
+  currentAjaxRequest = $.ajax({
+    url: root + "/ajax",
+    method: "POST",
+    data: {
+      scientificName: scientific_name,
+      functionType: "getDetailCreature",
+      creatureType,
+    },
+    success: (response) => {
+      createCreatureCard(currentCreature, creatureContainer);
+
+      var creatureInfo = response.creature_detail;
+
+      updateCreatureInformation(creatureInfo);
+    },
+    error: function (xhr, status, error) {
+      console.error("Error in getDetailCreature:", status, error);
+    },
+    complete: () => {
+      currentAjaxRequest = null;
+    },
+  });
+};
+
+const updateCreatureInformation = (creatureInfo) => {
+  currentCreature = {
+    image_url: creatureInfo.image_url,
+    name: creatureInfo.name,
+    scientific_name: creatureInfo.scientific_name,
+  };
+
+  $("#image").attr("src", creatureInfo.image_url);
+  $("#province_name, #name").text(provinceName);
+  $("#name").html(
+    `${creatureInfo.name} (tên khoa học: ${creatureInfo.scientific_name})`
+  );
+  $("#characteristic").html(`<b>Đặc điểm: </b>${creatureInfo.characteristic}`);
+  if (type === "animal") {
+    $("#behavior").html(`<b>Tập tính: </b>${creatureInfo.behavior}`);
+  } else {
+    $("#behavior").html("");
+  }
+  $("#habitat").html(`<b>Môi trường sống: </b>${creatureInfo.habitat}`);
+};
+
+const updateProvinceList = (provinceHasCreature) => {
+  const provinceListHTML = provinceHasCreature
+    .map((province) => `<a href='#' class='province-link'>${province.name}</a>`)
+    .join(", ");
+
+  $("#province_list").html(`<b>Có thể tìm thấy ở: </b>${provinceListHTML}`);
+
+  $("#province_list")
+    .off("click", ".province-link")
+    .on("click", ".province-link", (e) => {
+      const provinceValue = $(e.target).text();
+      zoomToProvince(provinceValue);
+      sendData(provinceValue);
+    });
+};
+
+const updateCreatureList = (creatures) => {
+  creatureList = creatures;
+  creatureContainer.empty();
+
+  listNumberMax = Math.min(creatureList.length, listNumber);
+
+  for (let i = 0; i < listNumberMax; i++) {
+    createCreatureCard(creatureList[i], creatureContainer);
+  }
+
+  if (listNumberMax < creatureList.length) {
+    btnMore.removeClass("hidden");
+  }
+};
+
+const createCreatureCard = (creature, container) => {
+  const colDiv = $("<div>").addClass("col");
+  const cardDiv = $("<div>").addClass("card bg-dark text-white");
+  const img = $("<img>")
     .addClass("card-img")
     .attr("src", creature.image_url)
     .attr("alt", creature.name);
-  var cardOverlayDiv = $("<div>").addClass("card-img-overlay");
-  var title = $("<h6>")
+  const cardOverlayDiv = $("<div>").addClass("card-img-overlay");
+  const title = $("<h6>")
     .addClass("card-title")
-    .text(creature.name + " (" + creature.scientific_name + ")");
+    .text(`${creature.name} (${creature.scientific_name})`);
 
   cardOverlayDiv.append(title);
   cardDiv.append(img).append(cardOverlayDiv);
 
-  var animalLink = $("<a>")
+  const animalLink = $("<a>")
     .attr("href", "#")
     .addClass("link")
     .append(cardDiv)
     .click(() => {
       getDetailCreature(creature.scientific_name);
-
       colDiv.remove();
     });
 
   colDiv.append(animalLink);
-
-  creatureContainer.append(colDiv);
-}
-
-function getDetailCreature(scientific_name) {
-  $.ajax({
-    url: root + "/ajax",
-    method: "POST",
-    data: {
-      scientificName: scientific_name,
-      type: "getDetailCreature",
-    },
-    success: function (response) {
-      // Add the current creature into card
-      createCreatureCard(currentCreature, creatureContainer);
-
-      var creatureInfo = response.creature_detail;
-
-      currentCreature = {
-        image_url: creatureInfo.image_url,
-        name: creatureInfo.name,
-        scientific_name: creatureInfo.scientific_name,
-      };
-
-      $("#image").attr("src", creatureInfo.image_url);
-      $("#name").text(
-        creatureInfo.name +
-          " (tên khoa học: " +
-          creatureInfo.scientific_name +
-          ")"
-      );
-      $("#characteristic").html(
-        "<b>Đặc điểm: </b>" + creatureInfo.characteristic
-      );
-      $("#behavior").html("<b>Tập tính: </b>" + creatureInfo.behavior);
-      $("#habitat").html("<b>Môi trường sống: </b>" + creatureInfo.habitat);
-    },
-  });
-}
+  container.append(colDiv);
+};
 
 // Button Show more Creature
 btnMore.click(() => {
-  var creatureContainer = $("#creature-list");
+  if (creatureList.length > listNumberMax) {
+    for (let i = listNumberMax; i < creatureList.length; i++) {
+      createCreatureCard(creatureList[i], creatureContainer);
+    }
 
-  for (var i = listNumber; i < listNumberMax; i++) {
-    createCreatureCard(creatureList[i], creatureContainer);
+    btnMore.addClass("hidden");
   }
-
-  btnMore.addClass("hidden");
 });
 
 // Button change Animal OR Plant
+$(".btn-container").on("click", ".custom-btn", function () {
+  type =
+    $(this).text().trim().toLowerCase() === "động vật" ? "animal" : "plant";
+
+  $(".custom-btn").toggleClass("btn-secondary btn-primary");
+  sendData(provinceName, type);
+});

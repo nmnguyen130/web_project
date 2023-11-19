@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?= ROOT ?>/assets/css/includes/popup.css">
+
 <div class="modal d-block modal-dialog" id="popup" role="document">
     <div class="modal-content rounded-4 shadow">
         <div class="modal-header border-bottom-0 d-flex justify-content-center">

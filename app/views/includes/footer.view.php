@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?= ROOT ?>/assets/css/includes/footer.css">
+
 <footer id="footer">
     <img src="<?= ROOT ?>/assets/images/wave2.jpg" class="footer-wave-img" alt="wave_image" />
     <div class="footer">

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?= ROOT ?>/assets/css/includes/header.css">
 </head>
 
 <body>

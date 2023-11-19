@@ -1,0 +1,33 @@
+.header {
+  background-image: linear-gradient(rgb(220, 220, 220, 0.3), transparent 90%);
+}
+
+.header.active {
+  background: var(--dark-color);
+}
+
+.navbar .navbar-brand .logo {
+  font-size: 1.7rem;
+  padding: 0 0.8rem;
+}
+
+.navbar .navbar-nav .nav-item > a {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.user-btn {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--white-color);
+}
+
+.login-signup-btn a {
+  font-size: 1.1rem;
+}
+
+@media screen and (max-width: 991px) {
+  .navbar .navbar-nav .nav-item > a {
+    float: right;
+  }
+}

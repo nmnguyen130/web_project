@@ -23,7 +23,7 @@ class Province
     {
         $query = "
         SELECT a.*
-        FROM province AS p
+        FROM $this->table AS p
         JOIN animal AS a ON JSON_CONTAINS(p.animal_list, JSON_ARRAY(a.scientific_name))
         WHERE p.name = :name;
     ";
@@ -37,7 +37,7 @@ class Province
     {
         $query = "
         SELECT a.*
-        FROM province AS p
+        FROM $this->table AS p
         JOIN plant AS a ON JSON_CONTAINS(p.plant_list, JSON_ARRAY(a.scientific_name))
         WHERE p.name = :name;
     ";
@@ -51,7 +51,7 @@ class Province
     {
         $query = "
         SELECT a.name, a.scientific_name, a.image_url
-        FROM province AS p
+        FROM $this->table AS p
         JOIN animal AS a ON JSON_CONTAINS(p.animal_list, JSON_QUOTE(a.scientific_name))
         WHERE p.name = :name
         AND a.scientific_name <> :scientific_name;
@@ -69,7 +69,7 @@ class Province
     {
         $query = "
         SELECT a.name, a.scientific_name, a.image_url
-        FROM province AS p
+        FROM $this->table AS p
         JOIN plant AS a ON JSON_CONTAINS(p.plant_list, JSON_QUOTE(a.scientific_name))
         WHERE p.name = :name
         AND a.scientific_name <> :scientific_name;
@@ -87,7 +87,7 @@ class Province
     {
         $query = $query = "
         SELECT a.*
-        FROM province AS p
+        FROM $this->table AS p
         JOIN animal AS a ON JSON_CONTAINS(p.animal_list, JSON_ARRAY(a.scientific_name))
         WHERE p.name = :name
         ORDER BY RAND()
@@ -103,7 +103,7 @@ class Province
     {
         $query = $query = "
         SELECT a.*
-        FROM province AS p
+        FROM $this->table AS p
         JOIN plant AS a ON JSON_CONTAINS(p.plant_list, JSON_ARRAY(a.scientific_name))
         WHERE p.name = :name
         ORDER BY RAND()
