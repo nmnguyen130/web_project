@@ -117,22 +117,15 @@
     </div>
 </main>
 <script>
-    const listItems = document.querySelectorAll(".list-group-item");
-    const tabPanes = document.querySelectorAll(".tab-pane");
+    $(document).ready(function() {
+        $(".list-group-item").click(function() {
+            var index = $(this).index();
 
-    listItems.forEach((listItem, index) => {
-        listItem.addEventListener("click", (e) => {
-            listItems.forEach((listItem) => {
-                listItem.classList.remove("active");
-            });
-            tabPanes.forEach((tabPane) => {
-                tabPane.classList.remove("active");
-                tabPane.classList.remove("show");
-            });
+            $(".list-group-item").removeClass("active");
+            $(".tab-pane").removeClass("active show");
 
-            listItems[index].classList.add("active");
-            tabPanes[index].classList.add("active");
-            tabPanes[index].classList.add("show");
+            $(this).addClass("active");
+            $(".tab-pane").eq(index).addClass("active show");
         });
     });
 </script>

@@ -16,7 +16,6 @@
 
 <script src="<?= ROOT ?>/assets/js/libs/bootstrap.bundle.min.js"></script>
 <script src="<?= ROOT ?>/assets/js/libs/raphael.min.js"></script>
-<script src="<?= ROOT ?>/assets/js/libs/jquery-3.7.1.min.js"></script>
 
 <script src="<?= ROOT ?>/assets/js/mapdata.js"></script>
 <script src="<?= ROOT ?>/assets/js/countrymap.js"></script>

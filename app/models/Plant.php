@@ -38,4 +38,13 @@ class Plant
 
         return $this->query($query, $data);
     }
+
+    public function getTotalPlant()
+    {
+        $query = "SELECT COUNT(*) as total FROM $this->table";
+
+        $result = $this->query($query);
+
+        return isset($result[0]->total) ? $result[0]->total : 0;
+    }
 }

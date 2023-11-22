@@ -74,7 +74,6 @@ if ($ses->pop('form_submission_success')) {
 }
 ?>
 
-<script src="<?= ROOT ?>/assets/js/libs/jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function() {
         var behaviorDiv = $("#behavior");
