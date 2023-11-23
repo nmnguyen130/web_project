@@ -92,7 +92,7 @@ class User
 
     public function login($data)
     {
-        $row = $this->first([$this->loginUniqueColumn => $data[$this->loginUniqueColumn]]);
+        $row = $this->getUserByLoginColumn($data[$this->loginUniqueColumn]);
 
         if ($row) {
             //confirm password
@@ -117,5 +117,42 @@ class User
         } else {
             $this->errors[$this->loginUniqueColumn] = "Wrong $this->loginUniqueColumn or password";
         }
+    }
+
+    public function changeUsername($data)
+    {
+        $row = $this->getUserByLoginColumn($data[$this->loginUniqueColumn]);
+
+        if ($row) {
+            $new['username'] = $data['username'];
+            $row->username = $data['username'];
+
+            $this->update($row->id, $new);
+
+            $ses = new \Core\Session;
+            $ses->auth($row);
+        }
+    }
+
+    public function changePassword($data)
+    {
+        $row = $this->getUserByLoginColumn($data[$this->loginUniqueColumn]);
+
+        if ($row) {
+            if (password_verify($data['current_pass'], $row->password)) {
+                $new['password'] = password_hash($data['new_pass'], PASSWORD_DEFAULT);
+                $this->update($row->id, $new);
+
+                $ses = new \Core\Session;
+                $ses->auth($row);
+            } else {
+                $this->errors['password'] = "Sai mật khẩu!";
+            }
+        }
+    }
+
+    private function getUserByLoginColumn($value)
+    {
+        return $this->first([$this->loginUniqueColumn => $value]);
     }
 }

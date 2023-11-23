@@ -4,7 +4,7 @@ namespace Controller;
 
 defined('ROOTPATH') or exit('Access Denied!');
 
-class Ajax
+class AjaxMap
 {
     use MainController;
 

@@ -14,3 +14,68 @@ main {
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
 }
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+/* Dropdown */
+.wrapper {
+  width: 260px;
+}
+
+.wrapper .content {
+  display: none;
+}
+
+.wrapper.active .content {
+  display: block;
+}
+
+.wrapper.active .select-btn i {
+  transform: rotate(-180deg);
+}
+
+.search i {
+  left: 4px;
+  color: #999;
+  line-height: 42px;
+}
+
+.search input {
+  padding-left: 36px;
+  width: 100%;
+  outline: none;
+}
+
+.options {
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.options li {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+}
+
+.options li:hover {
+  background-color: var(--background-color);
+  cursor: pointer;
+}
+
+.options::-webkit-scrollbar-track {
+  display: none;
+}
+
+.select-btn i {
+  transition: transform 0.3s linear;
+}
+
+.form-information {
+  display: none;
+}
+
+.form-information.active {
+  display: block;
+}
