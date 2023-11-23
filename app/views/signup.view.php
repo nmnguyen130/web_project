@@ -26,14 +26,23 @@
 
 				<div class="d-flex align-items-center input-field">
 					<i class="fa-solid fa-lock p-2"></i>
-					<input type="password" value="<?= old_value('password') ?>" name="password" placeholder="Password" class="form-control pwd">
+					<input type="password" value="<?= old_value('password') ?>" name="password" placeholder="Password" class="form-control pwd" id="newPass">
 					<span class="btn eye-icon">
 						<i class="fa-solid fa-eye-slash"></i>
 					</span>
 				</div>
 				<div class="my-2"><small class="text-danger"><?= $user->getError('password') ?></small></div>
 
-				<button class="btn btn-primary mb-3">Signup</button>
+				<div class="d-flex align-items-center input-field">
+					<i class="fa-solid fa-lock p-2"></i>
+					<input type="password" value="<?= old_value('password') ?>" name="password" placeholder="Confirm Password" class="form-control pwd" id="confirmPass">
+					<span class="btn eye-icon">
+						<i class="fa-solid fa-eye-slash"></i>
+					</span>
+				</div>
+				<div class="my-2"><small class="text-danger" id="confirmError"></small></div>
+
+				<button class="btn btn-primary mb-3" id="signup-btn">Signup</button>
 
 				<div class="d-flex justify-content-center">
 					<p class="small fw-bold mt-1 mb-0 text-form">
@@ -45,6 +54,7 @@
 	</div>
 
 	<script src="<?= ROOT ?>/assets/js/libs/bootstrap.bundle.min.js"></script>
+	<script src="<?= ROOT ?>/assets/js/libs/jquery-3.7.1.min.js"></script>
 	<script src="<?= ROOT ?>/assets/js/login.js"></script>
 </body>
 

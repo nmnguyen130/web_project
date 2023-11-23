@@ -1,33 +1,56 @@
-document.addEventListener("DOMContentLoaded", () => {
+$(document).ready(function () {
   // Show and hide the password
-  const btnShowHide = document.querySelectorAll(".eye-icon");
+  const btnShowHide = $(".eye-icon");
 
-  btnShowHide.forEach((eyeIcon) => {
-    const passwordField = eyeIcon.parentElement.querySelector(".pwd");
+  btnShowHide.each(function () {
+    const eyeIcon = $(this);
+    const passwordField = eyeIcon.parent().find(".pwd");
 
     function checkInputValue() {
-      if (passwordField.value.trim() === "") {
-        eyeIcon.classList.add("hidden");
+      if (passwordField.val().trim() === "") {
+        eyeIcon.addClass("hidden");
       } else {
-        eyeIcon.classList.remove("hidden");
+        eyeIcon.removeClass("hidden");
       }
     }
 
-    eyeIcon.addEventListener("click", () => {
-      if (passwordField.type === "password") {
-        passwordField.type = "text";
+    eyeIcon.on("click", function () {
+      if (passwordField.attr("type") === "password") {
+        passwordField.attr("type", "text");
         eyeIcon
-          .querySelector(".fa-solid")
-          .classList.replace("fa-eye-slash", "fa-eye");
+          .find(".fa-solid")
+          .removeClass("fa-eye-slash")
+          .addClass("fa-eye");
       } else {
-        passwordField.type = "password";
+        passwordField.attr("type", "password");
         eyeIcon
-          .querySelector(".fa-solid")
-          .classList.replace("fa-eye", "fa-eye-slash");
+          .find(".fa-solid")
+          .removeClass("fa-eye")
+          .addClass("fa-eye-slash");
       }
     });
 
-    passwordField.addEventListener("input", checkInputValue);
+    passwordField.on("input", checkInputValue);
     checkInputValue();
   });
+
+  // Check confirm pass
+  $("#confirmPass").on("input", function () {
+    checkPassMatch();
+  });
+
+  function checkPassMatch() {
+    var newPass = $("#newPass").val();
+    var confirmPass = $("#confirmPass").val();
+    var confirmError = $("#confirmError");
+    var signupBtn = $("#signup-btn");
+
+    if (newPass === confirmPass) {
+      confirmError.text("");
+      signupBtn.prop("disabled", false);
+    } else {
+      confirmError.text("Mật khẩu không trùng khớp!");
+      signupBtn.prop("disabled", true);
+    }
+  }
 });
