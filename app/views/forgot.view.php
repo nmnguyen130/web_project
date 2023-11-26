@@ -26,6 +26,9 @@
             <?php
             } elseif ($currentForm === 'otp') {
             ?>
+                <?php if (message()) : ?>
+                    <div class="alert alert-success text-center"><?= message('', true) ?></div>
+                <?php endif; ?>
                 <form method="post" class="d-flex flex-column">
                     <div class="text-white d-flex align-items-center title-container">
                         <a href="<?= ROOT ?>/forgot?form=email" class="text-white text-decoration-underline fs-5 ms-2">Back</a>
@@ -43,6 +46,9 @@
             <?php
             } elseif ($currentForm === 'password') {
             ?>
+                <?php if (message()) : ?>
+                    <div class="alert alert-success text-center"><?= message('', true) ?></div>
+                <?php endif; ?>
                 <form method="post" class="d-flex flex-column">
                     <div class="text-white d-flex align-items-center title-container">
                         <a href="<?= ROOT ?>/forgot?form=otp" class="text-white text-decoration-underline fs-5 ms-2">Back</a>

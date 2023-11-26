@@ -46,7 +46,7 @@ class Mail
             // Content
             $mail->isHTML(true);
             $mail->Subject = 'OTP for Password Reset';
-            $mail->Body    = 'Your OTP is: ' . $otp;
+            $mail->Body    = 'Your OTP is: ' . $otp . '. This OTP is valid for the next 5 minutes.';
 
             $mail->send();
         } catch (Exception $e) {

@@ -57,6 +57,12 @@ body {
   color: var(--grey-color);
 }
 
+.wrapper .card .input-field input[type="number"]::-webkit-inner-spin-button,
+.wrapper .card .input-field input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .wrapper .card .input-field span.btn {
   color: var(--grey-color);
   border: none;

@@ -148,8 +148,12 @@ class User
                 $new['password'] = password_hash($data['new_pass'], PASSWORD_DEFAULT);
                 $this->update($row->id, $new);
 
-                $ses = new \Core\Session;
-                $ses->auth($row);
+                if (!$check) {
+                    message('Password updated successfully!');
+                } else {
+                    $ses = new \Core\Session;
+                    $ses->auth($row);
+                }
             }
         }
     }
@@ -162,6 +166,7 @@ class User
             $mail = new Mail();
             $mail->generateAndSendOTP($row);
 
+            message("Your OTP has been sent to your email address.");
             return $row;
         } else {
             $this->errors['email'] = "Email không tồn tại!";
@@ -188,10 +193,10 @@ class User
 
         $enteredOtp = $data['otp'];
 
-
         if ($this->isValidOtp($row, $enteredOtp)) {
             $this->update($row->id, ['otp' => null, 'otp_generated_at' => null, 'otp_expires_at' => null]);
 
+            message('Please enter your new password.');
             redirect('forgot?form=password');
         } else {
             $this->errors['otp'] = "Invalid OTP. Please try again.";

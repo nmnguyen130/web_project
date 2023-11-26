@@ -23,16 +23,16 @@ class Forgot
 
                 $user = $data['user']->checkEmail($_POST);
                 if ($user) {
-                    $ses->auth($user);
+                    $ses->set('id', $user->id);
                     redirect('forgot?form=otp');
                 }
             } elseif ($currentForm === 'otp') {
 
-                $_POST['id'] = $ses->user('id');
+                $_POST['id'] = $ses->get('id');
                 $data['user']->checkOtp($_POST);
             } elseif ($currentForm === 'password') {
 
-                $_POST['id'] = $ses->user('id');
+                $_POST['id'] = $ses->pop('id');
                 $data['user']->changePassword($_POST, false);
                 redirect('login');
             }
