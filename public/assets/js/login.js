@@ -43,14 +43,14 @@ $(document).ready(function () {
     var newPass = $("#newPass").val();
     var confirmPass = $("#confirmPass").val();
     var confirmError = $("#confirmError");
-    var signupBtn = $("#signup-btn");
+    var mainBtn = $("#main-btn");
 
     if (newPass === confirmPass) {
       confirmError.text("");
-      signupBtn.prop("disabled", false);
+      mainBtn.prop("disabled", false);
     } else {
       confirmError.text("Mật khẩu không trùng khớp!");
-      signupBtn.prop("disabled", true);
+      mainBtn.prop("disabled", true);
     }
   }
 });

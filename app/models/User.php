@@ -17,6 +17,9 @@ class User
         'email',
         'role',
         'password',
+        'otp',
+        'otp_generated_at',
+        'otp_expires_at',
         'date_created'
     ];
 
@@ -121,7 +124,7 @@ class User
 
     public function changeUsername($data)
     {
-        $row = $this->getUserByLoginColumn($data[$this->loginUniqueColumn]);
+        $row = $this->getUserByLoginColumn($data['id']);
 
         if ($row) {
             $new['username'] = $data['username'];
@@ -134,25 +137,75 @@ class User
         }
     }
 
-    public function changePassword($data)
+    public function changePassword($data, $check = true)
     {
-        $row = $this->getUserByLoginColumn($data[$this->loginUniqueColumn]);
+        $row = $this->getUserByLoginColumn($data['id']);
 
         if ($row) {
-            if (password_verify($data['current_pass'], $row->password)) {
+            if ($check && !password_verify($data['current_pass'], $row->password)) {
+                $this->errors['password'] = "Sai mật khẩu!";
+            } else {
                 $new['password'] = password_hash($data['new_pass'], PASSWORD_DEFAULT);
                 $this->update($row->id, $new);
 
                 $ses = new \Core\Session;
                 $ses->auth($row);
-            } else {
-                $this->errors['password'] = "Sai mật khẩu!";
             }
+        }
+    }
+
+    public function checkEmail($data)
+    {
+        $row = $this->getUserByLoginColumn($data['email']);
+
+        if ($row) {
+            $mail = new Mail();
+            $mail->generateAndSendOTP($row);
+
+            return $row;
+        } else {
+            $this->errors['email'] = "Email không tồn tại!";
+            return null;
+        }
+    }
+
+    public function updateOtp($userId, $otp)
+    {
+        $expiresAt = date("Y-m-d H:i:s", strtotime("+5 minutes"));
+
+        $data = [
+            'otp' => $otp,
+            'otp_generated_at' => date("Y-m-d H:i:s"),
+            'otp_expires_at' => $expiresAt,
+        ];
+
+        $this->update($userId, $data);
+    }
+
+    public function checkOtp($data)
+    {
+        $row = $this->getUserByLoginColumn($data['id']);
+
+        $enteredOtp = $data['otp'];
+
+
+        if ($this->isValidOtp($row, $enteredOtp)) {
+            $this->update($row->id, ['otp' => null, 'otp_generated_at' => null, 'otp_expires_at' => null]);
+
+            redirect('forgot?form=password');
+        } else {
+            $this->errors['otp'] = "Invalid OTP. Please try again.";
         }
     }
 
     private function getUserByLoginColumn($value)
     {
-        return $this->first([$this->loginUniqueColumn => $value]);
+        $column = filter_var($value, FILTER_VALIDATE_EMAIL) ? 'email' : 'id';
+        return $this->first([$column => $value]);
+    }
+
+    private function isValidOtp($user, $enteredOtp)
+    {
+        return $user->otp === $enteredOtp && strtotime($user->otp_expires_at) > time();
     }
 }

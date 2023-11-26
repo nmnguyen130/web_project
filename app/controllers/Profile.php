@@ -18,7 +18,7 @@ class Profile
         $ses = new \Core\Session;
 
         if ($req->post()) {
-            $_POST['email'] = $ses->user('email');
+            $_POST['id'] = $ses->user('id');
             if (isset($_POST['username'])) {
 
                 $data['user']->changeUsername($_POST);

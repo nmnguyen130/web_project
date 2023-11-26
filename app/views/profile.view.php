@@ -14,9 +14,9 @@
             <div class="row">
                 <div class="col-md-3 pe-0 border-end">
                     <div class="list-group" role="tablist">
-                        <a class="list-group-item list-group-item-action active" data-bs-toggle="tab" href="#account-general">Chung</a>
-                        <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#account-change-password">Thay đổi mật khẩu</a>
-                        <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#account-info">Đóng góp của bạn</a>
+                        <a class="list-group-item list-group-item-action <?= ($active_tab === 'account-general') ? 'active' : ''; ?>" data-bs-toggle="tab" href="#account-general">Chung</a>
+                        <a class="list-group-item list-group-item-action <?= ($active_tab === 'account-change-password') ? 'active' : ''; ?>" data-bs-toggle="tab" href="#account-change-password">Thay đổi mật khẩu</a>
+                        <a class="list-group-item list-group-item-action <?= ($active_tab === 'account-info') ? 'active' : ''; ?>" data-bs-toggle="tab" href="#account-info">Đóng góp của bạn</a>
                         <a class="list-group-item list-group-item-action" href="<?= ROOT ?>/logout">Đăng xuất</a>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Nhập lại mật khẩu mới</label>
-                                        <input type="password" class="form-control" id="repeatPass" name='repeat_pass'" />
+                                        <input type="password" class="form-control" id="repeatPass" />
                                     </div>
                                     <div class=" my-2"><small class="text-danger" id="repeatError"></small>
                                     </div>

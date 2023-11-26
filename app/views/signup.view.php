@@ -14,19 +14,19 @@
 
 				<div class="d-flex align-items-center input-field mt-3">
 					<i class="fa-regular fa-user p-2"></i>
-					<input type="text" value="<?= old_value('username') ?>" name="username" placeholder="Username" class="form-control">
+					<input type="text" name="username" placeholder="Username" class="form-control">
 				</div>
 				<div class="my-2"><small class="text-danger"><?= $user->getError('username') ?></small></div>
 
 				<div class="d-flex align-items-center input-field">
 					<i class="fa-regular fa-user p-2"></i>
-					<input type="text" value="<?= old_value('email') ?>" name="email" placeholder="Email" class="form-control">
+					<input type="text" name="email" placeholder="Email" class="form-control">
 				</div>
 				<div class="my-2"><small class="text-danger"><?= $user->getError('email') ?></small></div>
 
 				<div class="d-flex align-items-center input-field">
 					<i class="fa-solid fa-lock p-2"></i>
-					<input type="password" value="<?= old_value('password') ?>" name="password" placeholder="Password" class="form-control pwd" id="newPass">
+					<input type="password" name="password" placeholder="Password" class="form-control pwd" id="newPass">
 					<span class="btn eye-icon">
 						<i class="fa-solid fa-eye-slash"></i>
 					</span>
@@ -35,14 +35,14 @@
 
 				<div class="d-flex align-items-center input-field">
 					<i class="fa-solid fa-lock p-2"></i>
-					<input type="password" value="<?= old_value('password') ?>" name="password" placeholder="Confirm Password" class="form-control pwd" id="confirmPass">
+					<input type="password" name="password" placeholder="Confirm Password" class="form-control pwd" id="confirmPass">
 					<span class="btn eye-icon">
 						<i class="fa-solid fa-eye-slash"></i>
 					</span>
 				</div>
 				<div class="my-2"><small class="text-danger" id="confirmError"></small></div>
 
-				<button class="btn btn-primary mb-3" id="signup-btn">Signup</button>
+				<button class="btn btn-primary mb-3" id="main-btn">Signup</button>
 
 				<div class="d-flex justify-content-center">
 					<p class="small fw-bold mt-1 mb-0 text-form">
@@ -54,7 +54,6 @@
 	</div>
 
 	<script src="<?= ROOT ?>/assets/js/libs/bootstrap.bundle.min.js"></script>
-	<script src="<?= ROOT ?>/assets/js/libs/jquery-3.7.1.min.js"></script>
 	<script src="<?= ROOT ?>/assets/js/login.js"></script>
 </body>
 

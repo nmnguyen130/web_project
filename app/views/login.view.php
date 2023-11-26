@@ -38,7 +38,7 @@
 							<span class="text-form">Remember Me</span>
 						</label>
 					</div>
-					<div class="mt-sm-0"><a href="#">Forgot password?</a></div>
+					<div class="mt-sm-0"><a href="<?= ROOT ?>/forgot">Forgot password?</a></div>
 				</div>
 
 				<button class="btn btn-primary mb-3 my-3">Login</button>
