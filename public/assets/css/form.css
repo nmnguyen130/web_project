@@ -1,4 +1,4 @@
-.header {
+header {
   background-color: var(--dark-color);
 }
 
@@ -61,8 +61,8 @@ input[type="radio"]:checked + label {
 
 .fill-in input:focus ~ label,
 .fill-in textarea:focus ~ label,
-.fill-in textarea:valid ~ label,
-.fill-in input:not(:placeholder-shown) ~ label {
+.fill-in input:not(:placeholder-shown) ~ label,
+.fill-in textarea:not(:placeholder-shown) ~ label {
   padding: 0 10px;
   top: -4px;
   left: 22px;

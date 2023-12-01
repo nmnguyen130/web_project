@@ -83,10 +83,10 @@
             <h1 class="d-flex justify-content-center mb-5 shadow-text">Popular</h1>
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div class="col">
+                    <div class="col d-flex">
                         <div class="card shadow-sm">
                             <img src="https://files.worldwildlife.org/wwfcmsprod/images/Tiger_resting_Bandhavgarh_National_Park_India/hero_small/6aofsvaglm_Medium_WW226365.jpg" alt="Image 1" />
-                            <div class="card-body">
+                            <div class="card-body d-flex flex-column justify-content-between">
                                 <p class="card-text">
                                     Hổ (tên khoa học là Panthera tigris) là một loài động
                                     vật có vú thuộc họ Mèo, chúng dễ nhận biết nhất bởi các
@@ -104,10 +104,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col d-flex">
                         <div class="card shadow-sm">
                             <img src="https://vcdn-vnexpress.vnecdn.net/2023/03/14/VNE-True-3915-1678790661.jpg" alt="Image 2" />
-                            <div class="card-body">
+                            <div class="card-body d-flex flex-column justify-content-between">
                                 <p class="card-text">
                                     Gấu đen châu Á, còn được biết đến với tên gọi gấu đen Tây
                                     Tạng, gấu đen Himalaya, hay gấu ngựa (tên khoa học là
@@ -115,7 +115,7 @@
                                     bình, vuốt sắc, màu đen với hình chữ "V" đặc trưng màu
                                     trắng trên ngực.
                                 </p>
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">
                                             View
@@ -125,10 +125,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col d-flex">
                         <div class="card shadow-sm">
                             <img src="https://www.thiennhien.net/wp-content/uploads/2013/10/141013_LK_voichaua.jpg" alt="Image 3" />
-                            <div class="card-body">
+                            <div class="card-body d-flex flex-column justify-content-between">
                                 <p class="card-text">
                                     Voi (tên khoa học là Elephantidae) là động vật có vú thuộc
                                     họ Elephantidae và là động vật trên cạn lớn nhất hiện
@@ -147,10 +147,10 @@
                         </div>
                     </div>
 
-                    <div class="col">
+                    <div class="col d-flex">
                         <div class="card shadow-sm">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Sarus_Crane_%28Grus_antigone%29.jpg" alt="Image 4" />
-                            <div class="card-body">
+                            <div class="card-body d-flex flex-column justify-content-between">
                                 <p class="card-text">
                                     Sếu đầu đỏ (tên khoa học là Grus antigone), hay còn gọi là
                                     sếu cổ trụi, là một phân loài của loài sếu sarus. Đây là
@@ -167,10 +167,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col d-flex">
                         <div class="card shadow-sm">
                             <img src="https://s.net.vn/xyw3" alt="Image 5" />
-                            <div class="card-body">
+                            <div class="card-body d-flex flex-column justify-content-between">
                                 <p class="card-text">
                                     Ngựa (tên khoa học là Equus ferus caballus) là một loài
                                     động vật có vú trong họ Equidae (họ Ngựa), bộ
@@ -187,10 +187,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col d-flex">
                         <div class="card shadow-sm">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Capricornis_milneedwardsii_2.jpg/300px-Capricornis_milneedwardsii_2.jpg" alt="Image 6" />
-                            <div class="card-body">
+                            <div class="card-body d-flex flex-column justify-content-between">
                                 <p class="card-text">
                                     Sơn dương (tên khoa học là Capricornis milneedwardsii
                                     maritimus) hay còn gọi là dê núi, là một tên gọi trong

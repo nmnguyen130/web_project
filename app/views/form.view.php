@@ -42,17 +42,17 @@
             </div>
 
             <div class="fill-in mt-4">
-                <textarea type="text" name="characteristic" cols="25" rows="4" required></textarea>
+                <textarea type="text" name="characteristic" cols="25" rows="4" placeholder=" "></textarea>
                 <label>Đặc điểm</label>
             </div>
 
             <div class="fill-in mt-4" id="behavior">
-                <textarea type="text" name="behavior" cols="25" rows="4" required></textarea>
+                <textarea type="text" name="behavior" cols="25" rows="4" placeholder=" "></textarea>
                 <label>Hành vi</label>
             </div>
 
             <div class="fill-in mt-4">
-                <textarea type="text" name="habitat" cols="25" rows="4" required></textarea>
+                <textarea type="text" name="habitat" cols="25" rows="4" placeholder=" "></textarea>
                 <label>Môi trường sống</label>
             </div>
 

@@ -165,9 +165,12 @@ btnMore.click(() => {
 
 // Button change Animal OR Plant
 $(".btn-container").on("click", ".custom-btn", function () {
-  type =
-    $(this).text().trim().toLowerCase() === "động vật" ? "animal" : "plant";
+  var $this = $(this);
+  type = $this.text().trim().toLowerCase() === "động vật" ? "animal" : "plant";
 
-  $(".custom-btn").toggleClass("btn-secondary btn-primary");
-  sendData(provinceName, type);
+  if ($this.hasClass("btn-primary")) {
+    $(".custom-btn").toggleClass("btn-primary btn-secondary");
+
+    sendData(provinceName, type);
+  }
 });

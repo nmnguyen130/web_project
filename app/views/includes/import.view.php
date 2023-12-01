@@ -13,3 +13,6 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/includes/base.css">
     <!-- Jquery JS -->
     <script src="<?= ROOT ?>/assets/js/libs/jquery-3.7.1.min.js"></script>
+    <script>
+        const root = "<?= ROOT ?>";
+    </script>

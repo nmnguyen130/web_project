@@ -6,10 +6,14 @@ header {
   display: none !important;
 }
 
+#map {
+  position: relative;
+}
+
 #info-box {
   position: absolute;
-  background: white;
-  padding: 5px;
+  background: var(--white-color);
+  padding: 4px 6px;
   border-radius: 4px;
   border: 1px solid #ccc;
   display: none;
@@ -21,6 +25,56 @@ header {
   background-size: cover;
 }
 
+/* Search Custom */
+.search-bar {
+  position: absolute;
+  top: 6px;
+  right: 0;
+}
+
+.search-bar .form-input {
+  max-width: 500px;
+  width: 100%;
+  height: 36px;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar .form-input input {
+  display: none;
+  flex-grow: 1;
+  padding: 0 16px;
+  height: 100%;
+  border: none;
+  background: var(--grey-color);
+  outline: none;
+  width: 100%;
+  color: var(--dark-color);
+}
+
+.search-bar .form-input button {
+  width: 36px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-color);
+  color: var(--white-color);
+  font-size: 18px;
+  border: none;
+  outline: none;
+}
+
+.search-bar.active .form-input input {
+  display: block;
+}
+
+.search-bar.active .form-input button {
+  background: var(--danger);
+}
+
+/* Detail col */
 .bg-image {
   background: url("https://images.pexels.com/photos/7864982/pexels-photo-7864982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
     no-repeat;

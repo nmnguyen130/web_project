@@ -4,6 +4,8 @@
 </head>
 
 <body>
+    <?php $this->view('includes/infor', $data) ?>
+
     <?php $this->view('includes/sidebar_nav', $data) ?>
 
     <main>
@@ -17,7 +19,7 @@
                     <li><i class="fa-solid fa-clipboard-list"></i>
                         <span class="info">
                             <h3>
-                                1,074
+                                <?php echo $totalPost ?>
                             </h3>
                             <p class="m-0">Total Posts</p>
                         </span>
@@ -65,27 +67,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>John Doe</td>
-                                    <td>Hổ</td>
-                                    <td>14-08-2023</td>
-                                    <td><span class="status pending">Pending</span></td>
-                                    <td><a href="#">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td>John Doe</td>
-                                    <td>Hổ</td>
-                                    <td>14-08-2023</td>
-                                    <td><span class="status approved">Approved</span></td>
-                                    <td><a href="#">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td>John Doe</td>
-                                    <td>Hổ</td>
-                                    <td>14-08-2023</td>
-                                    <td><span class="status rejected">Rejected</span></td>
-                                    <td><a href="#">View</a></td>
-                                </tr>
+                                <?php
+                                $recentPosts = $form->getPosts(5);
+                                ?>
+                                <?php foreach ($recentPosts as $post) : ?>
+                                    <tr>
+                                        <td><?php echo $post->username; ?></td>
+                                        <td><?php echo $post->name; ?></td>
+                                        <td><?php echo date('H:i:s d/m/Y', strtotime($post->submission_date)); ?></td>
+                                        <td><span class="status <?php echo strtolower($post->status); ?>"><?php echo $post->status; ?></span></td>
+                                        <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $post->id; ?>">View</a></td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -124,27 +117,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>John Doe</td>
-                                    <td>Hổ</td>
-                                    <td>14-08-2023</td>
-                                    <td><span class="status pending">Pending</span></td>
-                                    <td><a href="#">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td>John Doe</td>
-                                    <td>Hổ</td>
-                                    <td>14-08-2023</td>
-                                    <td><span class="status approved">Approved</span></td>
-                                    <td><a href="#">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td>John Doe</td>
-                                    <td>Hổ</td>
-                                    <td>14-08-2023</td>
-                                    <td><span class="status rejected">Rejected</span></td>
-                                    <td><a href="#">View</a></td>
-                                </tr>
+                                <?php
+                                $posts = $form->getPosts();
+                                ?>
+                                <?php foreach ($posts as $post) : ?>
+                                    <tr>
+                                        <td><?php echo $post->username; ?></td>
+                                        <td><?php echo $post->name; ?></td>
+                                        <td><?php echo date('H:i:s d/m/Y', strtotime($post->submission_date)); ?></td>
+                                        <td><span class="status <?php echo strtolower($post->status); ?>"><?php echo $post->status; ?></span></td>
+                                        <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $post->id; ?>">View</a></td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -176,6 +160,7 @@
                             <thead>
                                 <tr>
                                     <th>Creature Name</th>
+                                    <th>Scientific Name</th>
                                     <th>Update Date</th>
                                     <th>Action</th>
                                 </tr>
@@ -183,18 +168,21 @@
                             <tbody>
                                 <tr>
                                     <td>Hổ</td>
+                                    <td>None</td>
                                     <td>14-08-2023</td>
-                                    <td><a href="#">View</a></td>
+                                    <td><a href="#" class="showOverlayInfor">View</a></td>
                                 </tr>
                                 <tr>
                                     <td>Hổ</td>
+                                    <td>None</td>
                                     <td>14-08-2023</td>
-                                    <td><a href="#">View</a></td>
+                                    <td><a href="#" class="showOverlayInfor">View</a></td>
                                 </tr>
                                 <tr>
                                     <td>Hổ</td>
+                                    <td>None</td>
                                     <td>14-08-2023</td>
-                                    <td><a href="#">View</a></td>
+                                    <td><a href="#" class="showOverlayInfor">View</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -203,7 +191,6 @@
             </div>
         </div>
     </main>
-    </div>
 </body>
 
 <script src="<?= ROOT ?>/assets/js/libs/bootstrap.bundle.min.js"></script>

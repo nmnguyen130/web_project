@@ -189,7 +189,6 @@ if ($ses->pop('profile_submission_success')) {
     });
 </script>
 <script>
-    const root = "<?= ROOT ?>";
     const creatures = <?php echo json_encode($nameCreature); ?>;
 </script>
 <script src="<?= ROOT ?>/assets/js/form.js"></script>

@@ -12,9 +12,11 @@ class Admin
     {
         $data['title'] = 'Admin';
 
+        $data['form'] = new \Model\Form;
         $animal = new \Model\Animal;
         $plant = new \Model\Plant;
 
+        $data['totalPost'] = $data['form']->getTotalForms();
         $data['totalAnimal'] = $animal->getTotalAnimal();
         $data['totalPlant'] = $plant->getTotalPlant();
 
