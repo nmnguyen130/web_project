@@ -21,6 +21,13 @@ class Animal
         'habitat'
     ];
 
+    public function getAllAnimal()
+    {
+        $query = "SELECT name, scientific_name, 'animal' as type FROM $this->table";
+
+        return $this->query($query);
+    }
+
     public function getAllProvinceHasAnimal($scientific_name)
     {
         $query = "SELECT DISTINCT name FROM province

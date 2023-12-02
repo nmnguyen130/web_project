@@ -22,7 +22,9 @@ class AjaxAdmin
             } else if ($post_data['value'] === 'approve') {
                 $data['status'] = 'approved';
                 $form->update($post_data['postId'], $data);
-            } else if ($post_data['value'] === 'delete') {
+            } else if ($post_data['value'] === 'reject') {
+                $data['status'] = 'rejected';
+                $form->update($post_data['postId'], $data);
             } else {
                 $info['infor_form'] = $form->getFormById($post_data['postId'])[0];
             }

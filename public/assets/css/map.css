@@ -26,52 +26,92 @@ header {
 }
 
 /* Search Custom */
-.search-bar {
+.search {
   position: absolute;
-  top: 6px;
-  right: 0;
+  top: 4px;
 }
 
-.search-bar .form-input {
-  max-width: 500px;
+.search-bar {
+  background-color: var(--white-color);
+  width: 0;
+  overflow: hidden;
+}
+
+.bar-show {
   width: 100%;
-  height: 36px;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
+  animation-name: slideIn;
+  animation-duration: 2s;
+  overflow: visible;
 }
 
-.search-bar .form-input input {
-  display: none;
-  flex-grow: 1;
-  padding: 0 16px;
-  height: 100%;
-  border: none;
-  background: var(--grey-color);
+@keyframes slideIn {
+  0% {
+    left: 100%;
+    width: 0;
+  }
+  100% {
+    left: 0;
+    width: 100%;
+  }
+}
+
+.dropdown {
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.dropdown-list {
+  background-color: var(--white-color);
+  max-height: 0;
+  transition: 0.5s ease;
+}
+
+.list-show {
+  max-height: 300px;
+}
+
+.dropdown-list-item:hover {
+  transition: margin-left 0.2s ease;
+}
+
+.dropdown-list-item:hover {
+  margin-left: 6px;
+  color: var(--primary-color);
+}
+
+.search-box input {
   outline: none;
-  width: 100%;
-  color: var(--dark-color);
 }
 
-.search-bar .form-input button {
-  width: 36px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--primary-color);
+.search-box input::placeholder {
+  color: var(--primary-color);
+}
+
+.list-result {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.list-result li {
+  padding: 4px 6px;
+}
+
+.list-result li:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.search-icon {
+  background-color: var(--white-color);
+  color: var(--primary-color);
+  margin-left: auto;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.search-icon:hover {
+  background-color: var(--primary-color);
   color: var(--white-color);
-  font-size: 18px;
-  border: none;
-  outline: none;
-}
-
-.search-bar.active .form-input input {
-  display: block;
-}
-
-.search-bar.active .form-input button {
-  background: var(--danger);
 }
 
 /* Detail col */

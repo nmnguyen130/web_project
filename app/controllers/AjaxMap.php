@@ -20,10 +20,41 @@ class AjaxMap
         if ($req->posted()) {
             $post_data = $req->post();
 
-            if ($post_data['creatureType'] == "animal") {
-                $info = $this->handleAnimalRequest($post_data, $province, $animal);
-            } elseif ($post_data['creatureType'] == "plant") {
-                $info = $this->handlePlantRequest($post_data, $province, $plant);
+            if (isset($post_data['selectedItem'])) {
+                $selectedItem = $post_data['selectedItem'];
+
+                if ($selectedItem === "animal") {
+                    $info['result'] = $animal->getAllAnimal();
+                } else if ($selectedItem === "plant") {
+                    $info['result'] = $plant->getAllPlant();
+                } else {
+                    $info['result'] = array_merge(
+                        $animal->getAllAnimal(),
+                        $plant->getAllPlant()
+                    );
+                }
+            }
+
+            if (isset($post_data['searchText'])) {
+                $scientificName = $post_data['searchText'];
+                $info['provinces'] = $province->getAllProvinceHas($scientificName);
+
+                $type = $post_data['type'];
+                if ($type === "animal") {
+                    $info['creature_detail'] = $animal->getAnimalByName($scientificName)[0];
+                } else if ($type === "plant") {
+                    $info['creature_detail'] = $plant->getPlantByName($scientificName)[0];
+                }
+            }
+
+            if (isset($post_data['creatureType'])) {
+                $creatureType = $post_data['creatureType'];
+
+                if ($creatureType == "animal") {
+                    $info = $this->handleAnimalRequest($post_data, $province, $animal);
+                } elseif ($creatureType == "plant") {
+                    $info = $this->handlePlantRequest($post_data, $province, $plant);
+                }
             }
         }
 

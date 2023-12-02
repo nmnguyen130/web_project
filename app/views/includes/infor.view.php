@@ -48,8 +48,8 @@
                         <button type="button" class="btn-approve btn border-2 border-primary text-primary">
                             <i class="fa-solid fa-thumbs-up pe-2"></i>Approve
                         </button>
-                        <button type="button" class="btn-delete btn border-2 border-danger text-danger">
-                            <i class="fa-solid fa-trash-can pe-2"></i>Delete
+                        <button type="button" class="btn-reject btn border-2 border-danger text-danger">
+                            <i class="fa-solid fa-x pe-2"></i>Reject
                         </button>
                     </div>
                 </form>
@@ -69,15 +69,19 @@
                 editBtn.removeClass("border-dark").addClass("border-success");
                 editBtn.removeClass("text-dark").addClass("text-success");
                 editBtn.html('<i class="fa-solid fa-check pe-2"></i>Save');
-                editBtn.attr("type", "button");
 
                 formElements.each(function() {
-                    $(this).removeAttr('disabled');
+                    $(this).prop('disabled', false);
                 });
             } else {
                 editBtn.addClass("edit");
+                editBtn.removeClass("border-success").addClass("border-dark");
+                editBtn.removeClass("text-success").addClass("text-dark");
                 editBtn.html('<i class="fa-solid fa-wrench pe-2"></i>Edit');
-                editBtn.attr("type", "submit");
+
+                formElements.each(function() {
+                    $(this).prop('disabled', true);
+                });
             }
         });
     });

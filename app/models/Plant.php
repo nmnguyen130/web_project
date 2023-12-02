@@ -20,6 +20,13 @@ class Plant
         'habitat'
     ];
 
+    public function getAllPlant()
+    {
+        $query = "SELECT name, scientific_name, 'plant' as type FROM $this->table";
+
+        return $this->query($query);
+    }
+
     public function getAllProvinceHasPlant($scientific_name)
     {
         $query = "SELECT DISTINCT name FROM province

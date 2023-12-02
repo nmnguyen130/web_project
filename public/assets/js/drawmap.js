@@ -14,6 +14,7 @@ const windowHeight = window.innerHeight;
 var zoomScale = 1;
 
 const paths = [];
+let selectedPaths = [];
 
 // Set the Raphael paper for drawing the map
 var paper = Raphael("map", windowWidth, windowHeight);
@@ -49,10 +50,14 @@ function createPath(pathData, pathKey) {
 
   path.hover(
     () => {
-      path.animate({ fill: mapData.main_settings.state_hover_color }, 200);
+      if (!selectedPaths.includes(path)) {
+        path.animate({ fill: mapData.main_settings.state_hover_color }, 200);
+      }
     },
     () => {
-      path.animate({ fill: mapData.main_settings.state_color }, 200);
+      if (!selectedPaths.includes(path)) {
+        path.animate({ fill: mapData.main_settings.state_color }, 200);
+      }
       hideInfo();
     }
   );
@@ -62,10 +67,17 @@ function createPath(pathData, pathKey) {
   });
 
   path.mouseout(() => {
+    if (!selectedPaths.includes(path)) {
+      path.animate({ fill: mapData.main_settings.state_color }, 200);
+    }
     hideInfo();
   });
 
   path.click(() => {
+    resetSelectedPath();
+
+    handlePathSelect(path);
+
     var provinceName = mapInfo.names[pathKey];
     sendData(provinceName);
 
@@ -214,10 +226,51 @@ updateSVGSize();
 
 // Show province on map when click in a province list
 function zoomToProvince(provinceName) {
-  const path = paths.find(
-    (path) => mapInfo.names[path.data("key")] === provinceName
-  );
+  resetSelectedPath();
 
-  const bbox = path.getBBox();
-  zoomToRegion(bbox.x, bbox.y, bbox.width, bbox.height);
+  const path = findPathByProvinceName(provinceName);
+
+  if (path) {
+    handlePathSelect(path);
+    const bbox = path.getBBox();
+    zoomToRegion(bbox.x, bbox.y, bbox.width, bbox.height);
+  }
+}
+
+// Find all province by name
+function findAllProvinceBy(provinces) {
+  resetSelectedPath();
+
+  provinces.forEach((province) => {
+    const provinceName = province.name;
+    const path = findPathByProvinceName(provinceName);
+
+    if (path) {
+      handlePathSelect(path);
+    }
+  });
+
+  zoomToRegion(
+    mapInfo.initial_view.x / 2,
+    mapInfo.initial_view.y,
+    mapInfo.initial_view.x2,
+    mapInfo.initial_view.y2
+  );
+}
+
+// Util Function
+function resetSelectedPath() {
+  selectedPaths.forEach((selectedPath) => {
+    selectedPath.animate({ fill: mapData.main_settings.state_color }, 200);
+  });
+  selectedPaths = [];
+}
+
+function findPathByProvinceName(provinceName) {
+  return paths.find((path) => mapInfo.names[path.data("key")] === provinceName);
+}
+
+function handlePathSelect(path) {
+  path.animate({ fill: mapData.main_settings.state_hover_color }, 200);
+  selectedPaths.push(path);
 }

@@ -11,6 +11,7 @@ class Map
     public function index()
     {
         $data['title'] = 'Map';
+        $data['province'] = new \Model\Province;
 
         $this->view('map', $data);
     }

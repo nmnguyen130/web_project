@@ -114,4 +114,18 @@ class Province
 
         return $this->query($query, $data);
     }
+
+    public function getAllProvinceHas($scientificName)
+    {
+        $query = "
+        SELECT p.name
+        FROM $this->table AS p
+        WHERE JSON_CONTAINS(p.animal_list, JSON_ARRAY(:scientific_name))
+           OR JSON_CONTAINS(p.plant_list, JSON_ARRAY(:scientific_name));
+    ";
+
+        $data = [':scientific_name' => $scientificName];
+
+        return $this->query($query, $data);
+    }
 }

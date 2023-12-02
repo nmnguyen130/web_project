@@ -21,14 +21,10 @@ $(document).ready(() => {
     $(".btn-approve").click(function (e) {
       functionBtn("approve", postId);
     });
-  });
 
-  $(".btn-edit").click(function (e) {
-    console.log("edit");
-  });
-
-  $(".btn-delete").click(function (e) {
-    console.log("delete");
+    $(".btn-reject").click(function (e) {
+      functionBtn("reject", postId);
+    });
   });
 
   function functionBtn(value = null, postId) {
