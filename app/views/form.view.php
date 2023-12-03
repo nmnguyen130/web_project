@@ -1,6 +1,9 @@
 <?php $this->view('includes/import', $data) ?>
 
 <link rel="stylesheet" href="<?= ROOT ?>/assets/css/form.css">
+<link rel="stylesheet" href="<?= ROOT ?>/assets/css/includes/multi-select-tag.css">
+
+<style id="customStyles"></style>
 
 <?php $this->view('includes/header', $data) ?>
 
@@ -14,26 +17,30 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h2 class="pt-2">Góp ý của bạn</h2>
                 <ul class="form-select-sm my-2 d-flex justify-content-between" id="creature-type">
-                    <li>
-                        <input type="radio" id="animal" name="type" value="Animal" checked>
-                        <label for="animal">Động vật</label>
-                    </li>
-                    <li>
-                        <input type="radio" id="plant" name="type" value="Plant">
-                        <label for="plant">Thực vật</label>
-                    </li>
+                    <?php foreach (['Animal' => 'Động vật', 'Plant' => 'Thực vật'] as $value => $label) : ?>
+                        <li>
+                            <input type="radio" id="<?= strtolower($value) ?>" name="type" value="<?= $value ?>" <?= $value === 'Animal' ? 'checked' : '' ?>>
+                            <label for="<?= strtolower($value) ?>"><?= $label ?></label>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="row">
-                <div class="fill-in mt-1 col">
-                    <input type="text" name="name" placeholder=" ">
-                    <label>Tên loài</label>
-                </div>
+                <?php foreach (['name' => 'Tên loài', 'scientific_name' => 'Tên khoa học'] as $name => $label) : ?>
+                    <div class="fill-in mt-1 col">
+                        <input type="text" name="<?= $name ?>" placeholder=" ">
+                        <label><?= $label ?></label>
+                    </div>
+                <?php endforeach; ?>
+            </div>
 
-                <div class="fill-in mt-1 col">
-                    <input type="text" name="scientific_name" placeholder=" ">
-                    <label>Tên khoa học</label>
-                </div>
+            <div class="fill-in mt-4">
+                <select name="provinces[]" id="provinces" multiple>
+                    <?php foreach ((new \Model\Province)->getProvinces() as $province) : ?>
+                        <option value="<?= $province->name ?>"><?= $province->name ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <label>Tỉnh</label>
             </div>
 
             <div class="fill-in mt-4">
@@ -41,20 +48,12 @@
                 <label>Link ảnh (nếu có)</label>
             </div>
 
-            <div class="fill-in mt-4">
-                <textarea type="text" name="characteristic" cols="25" rows="4" placeholder=" "></textarea>
-                <label>Đặc điểm</label>
-            </div>
-
-            <div class="fill-in mt-4" id="behavior">
-                <textarea type="text" name="behavior" cols="25" rows="4" placeholder=" "></textarea>
-                <label>Hành vi</label>
-            </div>
-
-            <div class="fill-in mt-4">
-                <textarea type="text" name="habitat" cols="25" rows="4" placeholder=" "></textarea>
-                <label>Môi trường sống</label>
-            </div>
+            <?php foreach (['characteristic' => 'Đặc điểm', 'behavior' => 'Hành vi', 'habitat' => 'Môi trường sống'] as $name => $label) : ?>
+                <div class="fill-in mt-4" <?= $name === 'behavior' ? ' id="behavior"' : '' ?>>
+                    <textarea type="text" name="<?= $name ?>" cols="25" rows="4" placeholder=" "></textarea>
+                    <label><?= $label ?></label>
+                </div>
+            <?php endforeach; ?>
 
             <div class="fill-in my-2 d-flex justify-content-center">
                 <button class="btn btn-primary bg-success w-25">Send</button>
@@ -93,4 +92,34 @@ if ($ses->pop('form_submission_success')) {
             }
         }
     });
+</script>
+<script src="<?= ROOT ?>/assets/js/multi-select-tag.js"></script>
+<script>
+    new MultiSelectTag("provinces");
+</script>
+<script>
+    function checkContainDiv() {
+        var inputContainer = $(".input-container");
+        var itemContainer = inputContainer.find(".item-container");
+
+        var customStyles = $('#customStyles');
+        var cssRules = `
+            .fill-in select ~ label {
+                padding: 0 10px;
+                top: -4px;
+                left: 22px;
+                transform: translateX(10px) translateY(-7px);
+                color: var(--primary-color);
+                background-color: var(--white-color);
+                border-left: 1px solid var(--primary-color);
+                border-right: 1px solid var(--primary-color);
+            }`;
+
+        if (itemContainer.length > 0) {
+            customStyles.html(cssRules);
+        } else {
+            customStyles.html("");
+        }
+    }
+    setInterval(checkContainDiv, 10);
 </script>

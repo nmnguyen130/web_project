@@ -7,7 +7,7 @@
         <div class="col-10 col-md-5 bg-primary-subtle position-fixed">
             <div id="map" class="map-bg">
                 <div class="search d-flex align-items-center w-100">
-                    <div class="search-bar d-flex align-items-center rounded-1">
+                    <div class="search-bar d-flex align-items-center rounded-1 position-absolute">
                         <div class="dropdown position-relative rounded-1 shadow w-50">
                             <div class="dropdown-text d-flex align-items-center justify-content-between text-white py-2 px-3">
                                 <span>Choose:</span>

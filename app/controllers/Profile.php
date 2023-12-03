@@ -11,9 +11,10 @@ class Profile
     public function index()
     {
         $data['title'] = 'Profile';
-        $data['active_tab'] = 'account-general';
+        $data['active_tab'] = 'general';
 
         $data['user'] = new \Model\User;
+        $data['form'] = new \Model\Form;
         $req = new \Core\Request;
         $ses = new \Core\Session;
 
@@ -29,16 +30,9 @@ class Profile
                 if (!$data['user']->getError('password')) {
                     $ses->set('profile_submission_success', true);
                 }
-                $data['active_tab'] = 'account-change-password';
+                $data['active_tab'] = 'change-password';
             }
         }
-
-        $form = new \Model\Form;
-        $user_id = $ses->user('id');
-
-        $data['total'] = $form->getTotalForms($user_id);
-        $data['approved'] = $form->getTotalForms($user_id, "approved");
-        $data['nameCreature'] = $form->getAllNameInForm($user_id);
 
         $this->view('profile', $data);
     }

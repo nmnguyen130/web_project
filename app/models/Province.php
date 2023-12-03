@@ -19,6 +19,13 @@ class Province
         'plant_list'
     ];
 
+    public function getProvinces()
+    {
+        $query = "SELECT name FROM $this->table";
+
+        return $this->query($query);
+    }
+
     public function getAllAnimal($name)
     {
         $query = "

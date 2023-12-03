@@ -40,8 +40,7 @@ header {
 .bar-show {
   width: 100%;
   animation-name: slideIn;
-  animation-duration: 2s;
-  overflow: visible;
+  animation-duration: 1.5s;
 }
 
 @keyframes slideIn {
@@ -88,6 +87,7 @@ header {
 }
 
 .list-result {
+  width: 65%;
   max-height: 400px;
   overflow-y: auto;
 }

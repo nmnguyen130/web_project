@@ -9,10 +9,15 @@ $(document).ready(() => {
     $(".search-bar").toggleClass("bar-show");
     $(".list-result").hide();
     $(".dropdown-text span").text("Choose:");
+    if ($(".search-bar").has(".overflow-visible")) {
+      $(".search-bar").removeClass("overflow-visible");
+      $(".dropdown-list").removeClass("list-show");
+    }
   }
 
   $(".dropdown").click(function () {
     $(".dropdown-list").toggleClass("list-show");
+    $(".search-bar").addClass("overflow-visible");
   });
 
   $(".dropdown-list-item").on("click", function () {
@@ -74,8 +79,9 @@ $(document).ready(() => {
         type: type,
       },
       success: function (response) {
-        console.log(response);
         $(".text-show").addClass("hidden");
+        $("#province_name").addClass("hidden");
+        $(".card, .btn-container").addClass("hidden");
         $(".card").first().removeClass("hidden");
 
         findAllProvinceBy(response.provinces);

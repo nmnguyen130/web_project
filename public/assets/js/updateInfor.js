@@ -25,6 +25,7 @@ const sendData = (province, creatureType = type) => {
     },
     success: (response) => {
       $(".text-show").addClass("hidden");
+      $("#province_name").removeClass("hidden");
       $(".card, .btn-container").removeClass("hidden");
       btnMore.addClass("hidden");
 

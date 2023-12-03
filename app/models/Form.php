@@ -16,6 +16,7 @@ class Form
         'type',
         'scientific_name',
         'name',
+        'provinces',
         'image_url',
         'characteristic',
         'behavior',
@@ -23,6 +24,15 @@ class Form
         'submission_date',
         'status'
     ];
+
+    public function insertWithProvince($data)
+    {
+        if (isset($data['provinces']) && is_array($data['provinces'])) {
+            $data['provinces'] = json_encode($data['provinces'], JSON_UNESCAPED_UNICODE);
+        }
+
+        return $this->insert($data);
+    }
 
     public function getTotalForms($user_id = null, $status = null)
     {
