@@ -73,19 +73,30 @@ class Form
         return $this->query($query, $data);
     }
 
-    public function getPosts($limit = null)
+    public function getPosts($limit = null, $status = null)
     {
         $query = "
         SELECT f.*, u.username
         FROM $this->table AS f
         JOIN user AS u ON f.user_id = u.id
-        ORDER BY submission_date DESC
     ";
+
+        if ($status !== null) {
+            $query .= " WHERE f.status = :status";
+        }
+
+        $query .= " ORDER BY submission_date DESC";
 
         if ($limit !== null) {
             $query .= " LIMIT $limit";
         }
 
-        return $this->query($query);
+        $data = [];
+
+        if ($status !== null) {
+            $data = array(':status' => $status);
+        }
+
+        return $this->query($query, $data);
     }
 }

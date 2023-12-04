@@ -116,20 +116,20 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label"></label>
-                                                <textarea type="text" class="form-control" name="creature-characteristic" readonly></textarea>
+                                                <label class="form-label">Tỉnh:</label>
+                                                <input type="text" class="form-control" name="province" readonly></input>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label">Đặc điểm</label>
-                                                <textarea type="text" class="form-control" name="creature-characteristic" readonly></textarea>
+                                                <label class="form-label">Đặc điểm:</label>
+                                                <textarea type="text" class="form-control" name="characteristic" readonly></textarea>
                                             </div>
                                             <div class="form-group" id="behavior">
-                                                <label class="form-label">Hành vi</label>
-                                                <textarea type="text" class="form-control" name="creature-behavior" readonly></textarea>
+                                                <label class="form-label">Hành vi:</label>
+                                                <textarea type="text" class="form-control" name="behavior" readonly></textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label">Môi trường sống</label>
-                                                <textarea type="text" class="form-control" name="creature-habitat" readonly></textarea>
+                                                <label class="form-label">Môi trường sống:</label>
+                                                <textarea type="text" class="form-control" name="habitat" readonly></textarea>
                                             </div>
                                         </div>
                                     </div>

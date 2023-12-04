@@ -84,6 +84,7 @@ $(document).ready(() => {
         $(".card, .btn-container").addClass("hidden");
         $(".card").first().removeClass("hidden");
 
+        updateType(type);
         findAllProvinceBy(response.provinces);
         updateCreatureInformation(response.creature_detail);
         updateProvinceList(response.provinces);

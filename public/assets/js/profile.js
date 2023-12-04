@@ -75,18 +75,18 @@ const updateInforForm = (creatureInfo) => {
     getStatusDisplay(creatureInfo.status)
   );
 
-  $("textarea[name='creature-characteristic']").val(
-    creatureInfo.characteristic
-  );
+  $("input[name='province']").val(creatureInfo.provinces.join(", "));
+
+  $("textarea[name='characteristic']").val(creatureInfo.characteristic);
 
   if (creatureInfo.type === "animal") {
-    $("textarea[name='creature-behavior']").val(creatureInfo.behavior);
+    $("textarea[name='behavior']").val(creatureInfo.behavior);
     $("#behavior").show();
   } else {
     $("#behavior").hide();
   }
 
-  $("textarea[name='creature-habitat']").val(creatureInfo.habitat);
+  $("textarea[name='habitat']").val(creatureInfo.habitat);
 };
 
 const getStatusDisplay = (status) => {

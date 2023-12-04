@@ -55,7 +55,8 @@ CREATE TABLE animal (
     red_list BOOLEAN DEFAULT FALSE,
     characteristic TEXT,
     behavior TEXT,
-    habitat TEXT
+    habitat TEXT,
+    update_date DATETIME
 );
 
 CREATE TABLE plant (
@@ -64,7 +65,8 @@ CREATE TABLE plant (
     image_url VARCHAR(255),
     red_list BOOLEAN DEFAULT FALSE,
     characteristic TEXT,
-    habitat TEXT
+    habitat TEXT,
+    update_date DATETIME
 );
 
 CREATE TABLE red_list_animal (
@@ -135,12 +137,14 @@ SET animal_list = JSON_UNQUOTE(REPLACE(@animal_list, "'", '"')),
 LOAD DATA INFILE 'D:/biomap_animals.csv' INTO TABLE animal
 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
-(scientific_name, name, image_url, red_list, characteristic, behavior, habitat);
+(scientific_name, name, image_url, red_list, characteristic, behavior, habitat)
+SET update_date = NOW();
 
 LOAD DATA INFILE 'D:/biomap_plants.csv' INTO TABLE plant
 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
-(scientific_name, name, image_url, red_list, characteristic, habitat);
+(scientific_name, name, image_url, red_list, characteristic, habitat)
+SET update_date = NOW();
 
 -- SELECT * FROM user;
 -- SELECT * FROM form;

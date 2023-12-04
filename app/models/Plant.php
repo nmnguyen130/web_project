@@ -17,12 +17,13 @@ class Plant
         'image_url',
         'red_list',
         'characteristic',
-        'habitat'
+        'habitat',
+        'update_date'
     ];
 
     public function getAllPlant()
     {
-        $query = "SELECT name, scientific_name, 'plant' as type FROM $this->table";
+        $query = "SELECT *, 'plant' as type FROM $this->table";
 
         return $this->query($query);
     }

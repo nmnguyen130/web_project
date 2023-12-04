@@ -27,7 +27,7 @@
                     <li><i class="fa-solid fa-eye"></i>
                         <span class="info">
                             <h3>
-                                3,944
+                                12
                             </h3>
                             <p class="m-0">Site Visit</p>
                         </span>
@@ -69,16 +69,23 @@
                             <tbody>
                                 <?php
                                 $recentPosts = $form->getPosts(5);
+
+                                if (empty($recentPosts)) :
                                 ?>
-                                <?php foreach ($recentPosts as $post) : ?>
                                     <tr>
-                                        <td><?php echo $post->username; ?></td>
-                                        <td><?php echo $post->name; ?></td>
-                                        <td><?php echo date('H:i:s d/m/Y', strtotime($post->submission_date)); ?></td>
-                                        <td><span class="status <?php echo strtolower($post->status); ?>"><?php echo $post->status; ?></span></td>
-                                        <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $post->id; ?>">View</a></td>
+                                        <td colspan="5" class="text-center">No posts available</td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php else : ?>
+                                    <?php foreach ($recentPosts as $post) : ?>
+                                        <tr>
+                                            <td><?php echo $post->username; ?></td>
+                                            <td><?php echo $post->name; ?></td>
+                                            <td><?php echo date('H:i:s d/m/Y', strtotime($post->submission_date)); ?></td>
+                                            <td><span class="status <?php echo strtolower($post->status); ?>"><?php echo $post->status; ?></span></td>
+                                            <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $post->id; ?>">View</a></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
@@ -89,10 +96,11 @@
                 <div class="header d-flex flex-column flex-md-row align-items-center justify-content-between">
                     <h1>Form Management</h1>
                     <div class="dropdown">
-                        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Form Status
+                        <button class="btn btn-success dropdown-toggle" id="statusBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            All
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" id="statusForm">
+                            <li><a class="dropdown-item" href="#">All</a></li>
                             <li><a class="dropdown-item" href="#">Pending</a></li>
                             <li><a class="dropdown-item" href="#">Approved</a></li>
                             <li><a class="dropdown-item" href="#">Rejected</a></li>
@@ -116,19 +124,26 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="formInfor">
                                 <?php
                                 $posts = $form->getPosts();
+
+                                if (empty($posts)) :
                                 ?>
-                                <?php foreach ($posts as $post) : ?>
                                     <tr>
-                                        <td><?php echo $post->username; ?></td>
-                                        <td><?php echo $post->name; ?></td>
-                                        <td><?php echo date('H:i:s d/m/Y', strtotime($post->submission_date)); ?></td>
-                                        <td><span class="status <?php echo strtolower($post->status); ?>"><?php echo $post->status; ?></span></td>
-                                        <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $post->id; ?>">View</a></td>
+                                        <td colspan="5" class="text-center">No posts available</td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php else : ?>
+                                    <?php foreach ($posts as $post) : ?>
+                                        <tr>
+                                            <td><?php echo $post->username; ?></td>
+                                            <td><?php echo $post->name; ?></td>
+                                            <td><?php echo date('H:i:s d/m/Y', strtotime($post->submission_date)); ?></td>
+                                            <td><span class="status <?php echo strtolower($post->status); ?>"><?php echo $post->status; ?></span></td>
+                                            <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $post->id; ?>">View</a></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
@@ -165,25 +180,25 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Hổ</td>
-                                    <td>None</td>
-                                    <td>14-08-2023</td>
-                                    <td><a href="#" class="showOverlayInfor">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Hổ</td>
-                                    <td>None</td>
-                                    <td>14-08-2023</td>
-                                    <td><a href="#" class="showOverlayInfor">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Hổ</td>
-                                    <td>None</td>
-                                    <td>14-08-2023</td>
-                                    <td><a href="#" class="showOverlayInfor">View</a></td>
-                                </tr>
+                            <tbody id="creaturesInfor">
+                                <?php
+                                $animals = $animal->getAllAnimal();
+
+                                if (empty($animals)) :
+                                ?>
+                                    <tr>
+                                        <td colspan="5">No animal available</td>
+                                    </tr>
+                                <?php else : ?>
+                                    <?php foreach ($animals as $animal) : ?>
+                                        <tr>
+                                            <td><?php echo $animal->name; ?></td>
+                                            <td><?php echo $animal->scientific_name; ?></td>
+                                            <td><?php echo date('H:i:s d/m/Y', strtotime($animal->update_date)); ?></td>
+                                            <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $animal->id; ?>">View</a></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

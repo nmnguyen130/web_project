@@ -13,12 +13,12 @@ class Admin
         $data['title'] = 'Admin';
 
         $data['form'] = new \Model\Form;
-        $animal = new \Model\Animal;
-        $plant = new \Model\Plant;
+        $data['animal'] = new \Model\Animal;
+        $data['plant'] = new \Model\Plant;
 
         $data['totalPost'] = $data['form']->getTotalForms();
-        $data['totalAnimal'] = $animal->getTotalAnimal();
-        $data['totalPlant'] = $plant->getTotalPlant();
+        $data['totalAnimal'] = $data['animal']->getTotalAnimal();
+        $data['totalPlant'] = $data['plant']->getTotalPlant();
 
         $this->view('admin', $data);
     }

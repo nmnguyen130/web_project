@@ -10,6 +10,10 @@ let creatureList = [];
 let listNumberMax;
 let currentCreature = {};
 
+const updateType = (newType) => {
+  type = newType;
+};
+
 const sendData = (province, creatureType = type) => {
   if (currentAjaxRequest) {
     currentAjaxRequest.abort();

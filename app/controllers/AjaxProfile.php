@@ -18,7 +18,10 @@ class AjaxProfile
         if ($req->posted()) {
             $post_data = $req->post();
 
-            $info['infor_creature'] = $form->getFormById($post_data['id'])[0];
+            $result = $form->getFormById($post_data['id'])[0];
+            if ($result)
+                $result->provinces = json_decode($result->provinces, true);
+            $info['infor_creature'] = $result;
         }
 
         header('Content-Type: application/json');

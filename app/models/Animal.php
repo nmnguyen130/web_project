@@ -18,12 +18,13 @@ class Animal
         'red_list',
         'characteristic',
         'behavior',
-        'habitat'
+        'habitat',
+        'update_date'
     ];
 
     public function getAllAnimal()
     {
-        $query = "SELECT name, scientific_name, 'animal' as type FROM $this->table";
+        $query = "SELECT *, 'animal' as type FROM $this->table";
 
         return $this->query($query);
     }

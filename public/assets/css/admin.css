@@ -138,13 +138,6 @@ body {
   padding: 10px 0;
 }
 
-.content main .bottom-data .orders table tr td:first-child {
-  display: flex;
-  align-items: center;
-  grid-gap: 12px;
-  padding-left: 6px;
-}
-
 .content main .bottom-data .orders table tbody tr {
   cursor: pointer;
   transition: all 0.3s ease;
@@ -231,6 +224,10 @@ body {
 }
 
 /* Main - Form */
+.dropdown button {
+  min-width: 8rem !important;
+}
+
 .dropdown-menu {
   min-width: 5rem !important;
   width: 100%;
