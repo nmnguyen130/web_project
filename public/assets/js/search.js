@@ -47,7 +47,7 @@ $(document).ready(() => {
 
   function showListResult(selectedItem) {
     $.ajax({
-      url: root + "/ajaxmap",
+      url: root + "/ajaxMap",
       method: "POST",
       data: {
         selectedItem: selectedItem,
@@ -72,7 +72,7 @@ $(document).ready(() => {
 
   function findProvines(scientificName, type) {
     $.ajax({
-      url: root + "/ajaxmap",
+      url: root + "/ajaxMap",
       method: "POST",
       data: {
         searchText: scientificName,

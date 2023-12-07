@@ -41,6 +41,18 @@ function message(string $msg = null, bool $clear = false)
     return false;
 }
 
+/** load image. if not exist, load placeholder **/
+function get_image(string $file = ''): string
+{
+    $file = $file ?: '';
+
+    if (file_exists($file)) {
+        return ROOT . "/" . $file;
+    }
+
+    return ROOT . "/assets/images/no_image.jpg";
+}
+
 /** displays input values after a page refresh **/
 function old_checked(string $key, string $value, string $default = ""): string
 {

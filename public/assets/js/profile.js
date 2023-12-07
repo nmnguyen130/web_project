@@ -46,7 +46,7 @@ const getInforCreature = (id) => {
   }
 
   currentAjaxRequest = $.ajax({
-    url: root + "/ajaxprofile",
+    url: root + "/ajaxProfile",
     method: "POST",
     data: {
       id: id,

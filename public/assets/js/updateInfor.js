@@ -20,7 +20,7 @@ const sendData = (province, creatureType = type) => {
   }
 
   currentAjaxRequest = $.ajax({
-    url: root + "/ajaxmap",
+    url: root + "/ajaxMap",
     method: "POST",
     data: {
       provinceName: province,
@@ -54,7 +54,7 @@ const getDetailCreature = (scientific_name, creatureType = type) => {
   }
 
   currentAjaxRequest = $.ajax({
-    url: root + "/ajaxmap",
+    url: root + "/ajaxMap",
     method: "POST",
     data: {
       scientificName: scientific_name,

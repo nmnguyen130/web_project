@@ -17,17 +17,40 @@ class Form
         $form = new \Model\Form;
 
         if ($req->posted()) {
-            $data = $req->post();
+            $data['image'] = "";
 
-            $data['user_id'] = $ses->user('id');
-            $data['submission_date'] = date("Y-m-d H:i:s");
+            $files = $req->files();
+            if (!empty($files['image']['name'])) {
+                $folder = 'forms/';
+                if (!file_exists($folder)) {
+                    mkdir($folder, 0777, true);
+                    file_put_contents($folder . 'index.html', "");
+                }
 
-            $form->insertWithProvince($data);
+                $allowed = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
-            $ses->set('form_submission_success', true);
+                if (in_array($files['image']['type'], $allowed)) {
+                    $data = $req->post();
 
-            redirect('form');
+                    $data['user_id'] = $ses->user('id');
+                    $data['submission_date'] = date("Y-m-d H:i:s");
+
+                    $data['image'] = $folder . time() . '_' . $files['image']['name'];
+                    move_uploaded_file($files['image']['tmp_name'], $data['image']);
+
+                    $image = new \Model\Image;
+                    $image->resize($data['image'], 1000);
+
+                    $form->insertWithProvince($data);
+
+                    $ses->set('form_submission_success', true);
+                    redirect('form');
+                } else {
+                    $form->errors['image'] = "The only allowed file types are JPEG, JPG, PNG, and WebP.";
+                }
+            }
         }
+        $data['form'] = $form;
 
         $this->view('form', $data);
     }

@@ -13,7 +13,7 @@
     ?>
 
     <div class="container form-container">
-        <form name="feedback-form" method="post" class="mt-2">
+        <form name="feedback-form" method="post" class="mt-2" enctype="multipart/form-data">
             <div class="d-flex justify-content-between align-items-center">
                 <h2 class="pt-2">Góp ý của bạn</h2>
                 <ul class="form-select-sm my-2 d-flex justify-content-between" id="creature-type">
@@ -26,34 +26,47 @@
                 </ul>
             </div>
             <div class="row">
-                <?php foreach (['name' => 'Tên loài', 'scientific_name' => 'Tên khoa học'] as $name => $label) : ?>
-                    <div class="fill-in mt-1 col">
-                        <input type="text" name="<?= $name ?>" placeholder=" ">
-                        <label><?= $label ?></label>
+                <div class="col-md-8 col-12">
+                    <div class="row">
+                        <?php foreach (['name' => 'Tên loài', 'scientific_name' => 'Tên khoa học'] as $name => $label) : ?>
+                            <div class="fill-in mt-1 col">
+                                <input type="text" name="<?= $name ?>" placeholder=" ">
+                                <label><?= $label ?></label>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
-            </div>
 
-            <div class="fill-in mt-4">
-                <select name="provinces[]" id="provinces" multiple>
-                    <?php foreach ((new \Model\Province)->getProvinces() as $province) : ?>
-                        <option value="<?= $province->name ?>"><?= $province->name ?></option>
+                    <div class="fill-in mt-4">
+                        <select name="provinces[]" id="provinces" multiple>
+                            <?php foreach ((new \Model\Province)->getProvinces() as $province) : ?>
+                                <option value="<?= $province->name ?>"><?= $province->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <label>Tỉnh</label>
+                    </div>
+                    <?php foreach (['characteristic' => 'Đặc điểm', 'behavior' => 'Hành vi', 'habitat' => 'Môi trường sống'] as $name => $label) : ?>
+                        <div class="fill-in mt-4" <?= $name === 'behavior' ? ' id="behavior"' : '' ?>>
+                            <textarea type="text" name="<?= $name ?>" cols="25" rows="4" placeholder=" "></textarea>
+                            <label><?= $label ?></label>
+                        </div>
                     <?php endforeach; ?>
-                </select>
-                <label>Tỉnh</label>
-            </div>
-
-            <div class="fill-in mt-4">
-                <input type="text" name="image_url" placeholder=" ">
-                <label>Link ảnh (nếu có)</label>
-            </div>
-
-            <?php foreach (['characteristic' => 'Đặc điểm', 'behavior' => 'Hành vi', 'habitat' => 'Môi trường sống'] as $name => $label) : ?>
-                <div class="fill-in mt-4" <?= $name === 'behavior' ? ' id="behavior"' : '' ?>>
-                    <textarea type="text" name="<?= $name ?>" cols="25" rows="4" placeholder=" "></textarea>
-                    <label><?= $label ?></label>
                 </div>
-            <?php endforeach; ?>
+
+                <div class="col-md-4 col-12 mt-4 mt-md-0 text-center">
+                    <label>
+                        <div class="fill-in mt-1">
+                            <input onchange="displayImage(this.files[0])" name="image" type="file">
+                            <label>Select Image</label>
+                        </div>
+                        <div>
+                            <img src="<?= get_image() ?>" class="image-preview img-thumbnail">
+                        </div>
+                    </label>
+                    <div class="my-2"><small class="text-danger"><?= $form->getError('image') ?></small></div>
+                </div>
+            </div>
+
+
 
             <div class="fill-in my-2 d-flex justify-content-center">
                 <button class="btn btn-primary bg-success w-25">Send</button>
@@ -98,6 +111,16 @@ if ($ses->pop('form_submission_success')) {
     new MultiSelectTag("provinces");
 </script>
 <script>
+    function displayImage(file) {
+        let allowed = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+
+        if (!allowed.includes(file.type)) {
+            return;
+        }
+
+        $('.image-preview').attr('src', URL.createObjectURL(file));
+    }
+
     function checkContainDiv() {
         var inputContainer = $(".input-container");
         var itemContainer = inputContainer.find(".item-container");

@@ -195,7 +195,7 @@
                                             <td><?php echo $animal->name; ?></td>
                                             <td><?php echo $animal->scientific_name; ?></td>
                                             <td><?php echo date('H:i:s d/m/Y', strtotime($animal->update_date)); ?></td>
-                                            <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $animal->id; ?>">View</a></td>
+                                            <td><a href="#" class="view-creature" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $animal->id; ?>">View</a></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php endif; ?>

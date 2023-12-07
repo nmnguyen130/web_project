@@ -8,7 +8,7 @@ $(document).ready(() => {
     var postId = $(this).data("post-id");
 
     $.ajax({
-      url: root + "/ajaxadmin",
+      url: root + "/ajaxAdmin",
       method: "POST",
       data: {
         value: null,
@@ -34,7 +34,7 @@ $(document).ready(() => {
     }
 
     currentAjaxRequest = $.ajax({
-      url: root + "/ajaxadmin",
+      url: root + "/ajaxAdmin",
       method: "POST",
       data: {
         value: value,
@@ -69,7 +69,7 @@ $(document).ready(() => {
     $("#statusBtn").text(selectedValue);
 
     $.ajax({
-      url: root + "/ajaxadmin",
+      url: root + "/ajaxAdmin",
       method: "POST",
       data: {
         status: selectedValue.toLowerCase(),
@@ -108,7 +108,7 @@ $(document).ready(() => {
     var selectedType = $(this).val().toLowerCase();
 
     $.ajax({
-      url: root + "/ajaxadmin",
+      url: root + "/ajaxAdmin",
       method: "POST",
       data: {
         type: selectedType,

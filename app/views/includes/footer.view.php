@@ -47,7 +47,6 @@
         <p>&copy; 2023 Copyright <a href="#" class="text-white text-decoration-underline ">Developer</a></p>
     </div>
 </footer>
-<script src="<?= ROOT ?>/assets/js/libs/bootstrap.bundle.min.js"></script>
 <script src="<?= ROOT ?>/assets/js/script.js"></script>
 </body>
 

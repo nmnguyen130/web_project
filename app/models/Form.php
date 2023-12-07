@@ -17,7 +17,7 @@ class Form
         'scientific_name',
         'name',
         'provinces',
-        'image_url',
+        'image',
         'characteristic',
         'behavior',
         'habitat',

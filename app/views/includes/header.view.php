@@ -30,7 +30,7 @@
 
                     <?php if ($ses->is_logged_in()) : ?>
                         <div class="dropdown d-flex flex-column flex-lg-row justify-content-end align-items-end py-2 mx-sm-2">
-                            <a class="user-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="user-btn dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Hi, <?= $ses->user('username') ?>
                             </a>
                             <ul class="dropdown-menu">
