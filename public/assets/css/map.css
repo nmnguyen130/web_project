@@ -54,6 +54,14 @@ header {
   }
 }
 
+.fa-chevron-down {
+  transition: transform 0.5s;
+}
+
+.rotate-up {
+  transform: rotate(-180deg);
+}
+
 .dropdown {
   background-color: var(--primary-color);
   cursor: pointer;

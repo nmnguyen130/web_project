@@ -11,12 +11,14 @@ $(document).ready(() => {
     $(".dropdown-text span").text("Choose:");
     if ($(".search-bar").has(".overflow-visible")) {
       $(".search-bar").removeClass("overflow-visible");
+      $(".fa-chevron-down").removeClass("rotate-up");
       $(".dropdown-list").removeClass("list-show");
     }
   }
 
   $(".dropdown").click(function () {
     $(".dropdown-list").toggleClass("list-show");
+    $(".fa-chevron-down").toggleClass("rotate-up");
     $(".search-bar").addClass("overflow-visible");
   });
 

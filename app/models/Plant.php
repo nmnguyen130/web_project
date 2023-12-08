@@ -9,7 +9,7 @@ class Plant
     use Model;
 
     protected $table = 'plant';
-    protected $primaryKey = 'scientific_name';
+    public $primaryKey = 'scientific_name';
 
     protected $allowedColumns = [
         'scientific_name',
@@ -21,14 +21,14 @@ class Plant
         'update_date'
     ];
 
-    public function getAllPlant()
+    public function getAllCreatures()
     {
         $query = "SELECT *, 'plant' as type FROM $this->table";
 
         return $this->query($query);
     }
 
-    public function getAllProvinceHasPlant($scientific_name)
+    public function getAllProvinceHas($scientific_name)
     {
         $query = "SELECT DISTINCT name FROM province
         WHERE JSON_CONTAINS(plant_list, JSON_ARRAY(:scientific_name), '$')";
@@ -38,7 +38,7 @@ class Plant
         return $this->query($query, $data);
     }
 
-    public function getPlantByName($scientific_name)
+    public function getCreatureByName($scientific_name)
     {
         $query = "SELECT *, 'plant' as type FROM $this->table WHERE scientific_name = :scientific_name";
 
@@ -47,7 +47,7 @@ class Plant
         return $this->query($query, $data)[0];
     }
 
-    public function getTotalPlant()
+    public function getTotal()
     {
         $query = "SELECT COUNT(*) as total FROM $this->table";
 

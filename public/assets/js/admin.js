@@ -5,7 +5,10 @@ $(document).ready(() => {
   $(".view-post").click(function (e) {
     e.preventDefault();
 
-    $(".btn-edit").hide();
+    var username = $(this).closest("tr").find("td:first-child").text();
+    $(".the-title").text("Contributed by " + username);
+
+    $(".btn-edit, .btn-delete").hide();
     $(".btn-approve, .btn-reject").show();
 
     var postId = $(this).data("post-id");
@@ -42,11 +45,13 @@ $(document).ready(() => {
   $("#creaturesInfor").on("click", ".view-creature", function (e) {
     e.preventDefault();
 
-    $(".btn-edit").show();
+    $(".btn-edit, .btn-delete").show();
     $(".btn-approve, .btn-reject").hide();
 
     var scientificName = $(this).data("scientific-name");
     var type = $(this).data("type");
+
+    $(".the-title").text(type);
 
     if (currentAjaxRequest) {
       currentAjaxRequest.abort();
@@ -57,7 +62,7 @@ $(document).ready(() => {
       method: "POST",
       data: {
         scientificName: scientificName,
-        type: type,
+        type: type.toLowerCase(),
       },
       success: function (response) {
         fillForm(response.creature);
@@ -65,6 +70,10 @@ $(document).ready(() => {
       complete: () => {
         currentAjaxRequest = null;
       },
+    });
+
+    $(".btn-delete").one("click", function (e) {
+      functionBtn("delete", scientificName, type);
     });
   });
 
@@ -82,6 +91,35 @@ $(document).ready(() => {
       },
       success: function () {
         location.reload();
+      },
+      complete: () => {
+        currentAjaxRequest = null;
+      },
+    });
+  }
+
+  function functionBtn(value = null, scientificName, type) {
+    if (currentAjaxRequest) {
+      currentAjaxRequest.abort();
+    }
+
+    currentAjaxRequest = $.ajax({
+      url: root + "/ajaxAdmin",
+      method: "POST",
+      data: {
+        value: value,
+        scientificName: scientificName,
+        creatureType: type,
+      },
+      success: function (response) {
+        $("#modalInfor").modal("hide");
+        updateCreaturesTable(response.creatures, type);
+
+        if (type === "Animal") {
+          $(".insights li:eq(2) h3").text(response.total);
+        } else {
+          $(".insights li:eq(3) h3").text(response.total);
+        }
       },
       complete: () => {
         currentAjaxRequest = null;
@@ -108,7 +146,7 @@ $(document).ready(() => {
 
   // Toggle radio button Animal and Plant
   $('input[name="type"]').change(function () {
-    var selectedType = $(this).val().toLowerCase();
+    var selectedType = $(this).val();
 
     if (currentAjaxRequest) {
       currentAjaxRequest.abort();
@@ -118,7 +156,7 @@ $(document).ready(() => {
       url: root + "/ajaxAdmin",
       method: "POST",
       data: {
-        type: selectedType,
+        type: selectedType.toLowerCase(),
       },
       success: function (response) {
         updateCreaturesTable(response.creatures, selectedType);
@@ -134,7 +172,8 @@ $(document).ready(() => {
 function fillForm(inforForm) {
   $('[name="name"]').val(inforForm.name);
   $('[name="scientific_name"]').val(inforForm.scientific_name);
-  $('[name="image_url"]').val(inforForm.image_url);
+  $("#img-preview").attr("src", inforForm.image);
+  $('[name="province"]').val(inforForm.provinces.join(", "));
   $('[name="characteristic"]').val(inforForm.characteristic);
   if (inforForm.type === "animal") {
     $("#behavior").show();
@@ -171,6 +210,8 @@ function updatePostsTable(posts) {
 }
 
 function updateCreaturesTable(creatures, type) {
+  $(".creature-title").text(type);
+
   bodyTable = $("#creaturesInfor").empty();
   if (creatures.length > 0) {
     creatures.forEach((creature) => {

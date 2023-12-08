@@ -9,9 +9,9 @@
                 <div class="col-md-5 col-lg-6 col-xl-6 mx-auto mt-3">
                     <h5 class="text-uppercase mb-4 font-weight-bold">Bio<span class="text-warning">Map</span></h5>
                     <p>
-                        BiologicalMap: Discover and explore Vietnam's diverse biological resources
-                        through interactive maps. Our mission is to provide users with engaging
-                        knowledge and experiences while continually updating information.
+                        Biomap: Khám phá tài nguyên sinh vật đa dạng của Việt Nam thông qua bản
+                        đồ tương tác. Sứ mệnh của chúng tôi là cung cấp cho người dùng những kiến
+                        ​​thức, trải nghiệm hấp dẫn đồng thời liên tục cập nhật thông tin.
                     </p>
                     <div class="footer-socials">
                         <a href="#">

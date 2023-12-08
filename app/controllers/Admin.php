@@ -16,10 +16,6 @@ class Admin
         $data['animal'] = new \Model\Animal;
         $data['plant'] = new \Model\Plant;
 
-        $data['totalPost'] = $data['form']->getTotalForms();
-        $data['totalAnimal'] = $data['animal']->getTotalAnimal();
-        $data['totalPlant'] = $data['plant']->getTotalPlant();
-
         $this->view('admin', $data);
     }
 }

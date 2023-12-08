@@ -24,13 +24,13 @@ class AjaxMap
                 $selectedItem = $post_data['selectedItem'];
 
                 if ($selectedItem === "animal") {
-                    $info['result'] = $animal->getAllAnimal();
+                    $info['result'] = $animal->getAllCreatures();
                 } else if ($selectedItem === "plant") {
-                    $info['result'] = $plant->getAllPlant();
+                    $info['result'] = $plant->getAllCreatures();
                 } else {
                     $info['result'] = array_merge(
-                        $animal->getAllAnimal(),
-                        $plant->getAllPlant()
+                        $animal->getAllCreatures(),
+                        $plant->getAllCreatures()
                     );
                 }
             }
@@ -41,9 +41,9 @@ class AjaxMap
 
                 $type = $post_data['type'];
                 if ($type === "animal") {
-                    $info['creature_detail'] = $animal->getAnimalByName($scientificName);
+                    $info['creature_detail'] = $animal->getCreatureByName($scientificName);
                 } else if ($type === "plant") {
-                    $info['creature_detail'] = $plant->getPlantByName($scientificName);
+                    $info['creature_detail'] = $plant->getCreatureByName($scientificName);
                 }
             }
 
@@ -69,7 +69,7 @@ class AjaxMap
         if ($postData['functionType'] == "getCreatureOfProvince") {
             $animalInfo = $province->randomAnimal($postData['provinceName']);
             $info['creature_info'] = $animalInfo[0];
-            $info['creature_province'] = $animal->getAllProvinceHasAnimal($info['creature_info']->scientific_name);
+            $info['creature_province'] = $animal->getAllProvinceHas($info['creature_info']->scientific_name);
             $info['creature_list'] = $province->getAnimalsExcept($postData['provinceName'], $info['creature_info']->scientific_name);
         } elseif ($postData['functionType'] == "getDetailCreature") {
             $info['creature_detail'] = $animal->getAnimalByName($postData['scientificName']);
@@ -85,7 +85,7 @@ class AjaxMap
         if ($postData['functionType'] == "getCreatureOfProvince") {
             $plantInfo = $province->randomPlant($postData['provinceName']);
             $info['creature_info'] = $plantInfo[0];
-            $info['creature_province'] = $plant->getAllProvinceHasPlant($info['creature_info']->scientific_name);
+            $info['creature_province'] = $plant->getAllProvinceHas($info['creature_info']->scientific_name);
             $info['creature_list'] = $province->getPlantsExcept($postData['provinceName'], $info['creature_info']->scientific_name);
         } elseif ($postData['functionType'] == "getDetailCreature") {
             $info['creature_detail'] = $plant->getPlantByName($postData['scientificName']);

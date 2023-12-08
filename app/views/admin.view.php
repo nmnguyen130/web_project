@@ -21,7 +21,7 @@
                     <li><i class="fa-solid fa-clipboard-list"></i>
                         <span class="info">
                             <h3>
-                                <?php echo $totalPost ?>
+                                <?= $form->getTotalForms() ?>
                             </h3>
                             <p class="m-0">Total Posts</p>
                         </span>
@@ -37,7 +37,7 @@
                     <li><i class="fa-solid fa-paw"></i>
                         <span class="info">
                             <h3>
-                                <?php echo $totalAnimal ?>
+                                <?= $animal->getTotal() ?>
                             </h3>
                             <p class="m-0">Total Animals</p>
                         </span>
@@ -45,7 +45,7 @@
                     <li><i class="fa-solid fa-tree"></i>
                         <span class="info">
                             <h3>
-                                <?php echo $totalPlant ?>
+                                <?= $plant->getTotal() ?>
                             </h3>
                             <p class="m-0">Total Plants</p>
                         </span>
@@ -157,7 +157,7 @@
                     <div class="orders">
                         <div class="header">
                             <i class="fa-solid fa-clipboard-list fs-5"></i>
-                            <h3 class="m-0">Posts</h3>
+                            <h3 class="m-0 creature-title"></h3>
                         </div>
                         <table>
                             <thead>
@@ -170,9 +170,9 @@
                             </thead>
                             <tbody id="creaturesInfor">
                                 <?php
-                                $animals = json_encode($animal->getAllAnimal());
+                                $animals = json_encode($animal->getAllCreatures());
 
-                                echo "<script>updateCreaturesTable($animals, 'animal')</script>";
+                                echo "<script>updateCreaturesTable($animals, 'Animal')</script>";
                                 ?>
                             </tbody>
                         </table>

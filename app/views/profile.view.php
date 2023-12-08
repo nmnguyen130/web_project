@@ -110,11 +110,11 @@
                                         <div class="form-information">
                                             <div class="row">
                                                 <div class="col py-2">
-                                                    <div class="form-group d-flex align-items-center my-3">
-                                                        <label class="form-label m-0 me-3">Ngày gửi:</label>
+                                                    <div class="form-group d-flex align-items-center my-3 pt-2">
+                                                        <label class="form-label m-0 me-4">Ngày gửi:</label>
                                                         <input type="text" class="form-control w-auto" value="" disabled />
                                                     </div>
-                                                    <div class="form-group d-flex align-items-center my-3">
+                                                    <div class="form-group d-flex align-items-center my-3 pt-3">
                                                         <label class="form-label m-0 me-3">Tình trạng:</label>
                                                         <input type="text" class="form-control w-auto" value="" disabled />
                                                     </div>
@@ -171,7 +171,6 @@ if ($ses->pop('profile_submission_success')) {
     $(document).ready(function() {
         var repeatPassInput = $("#repeatPass");
         var saveButton = $("#save");
-        var saveButton = $("#save");
 
         repeatPassInput.on("input", checkNewPassMatch);
 
@@ -186,11 +185,11 @@ if ($ses->pop('profile_submission_success')) {
 
         $(".list-group-item").on("click", function() {
             if ($("#info").hasClass("active")) {
-                $("#save").show();
+                $("#save").hide();
                 $('.wrapper').removeClass("active").find('span').text("Sinh vật");;
                 $('.form-information').removeClass("active");
             } else {
-                $("#save").hide();
+                $("#save").show();
             }
         });
 

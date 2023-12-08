@@ -18,14 +18,14 @@
                         Bio<span class="text-warning">Map</span>
                     </h1>
                     <p class="lh-lg">
-                        Welcome to BioMap - The place to explore the unique beauty of
-                        Vietnam's nature. Join in to connect with the vibrant
-                        landscapes, discover fascinating wildlife, and be part of our
-                        mission to preserve and cherish the environmental wonders that
-                        make Vietnam truly special.
+                        Chào mừng bạn đến với BioMap - Nơi khám phá vẻ đẹp độc đáo của thiên nhiên
+                        Việt Nam. Hãy tham gia để kết nối với những cảnh quan rực rỡ, khám phá động
+                        vật hoang dã hấp dẫn và trở thành một phần trong sứ mệnh của chúng tôi nhằm
+                        bảo tồn và trân trọng những kỳ quan môi trường đã tô đậm sắc màu thiên nhiên
+                        Việt Nam.
                     </p>
                     <a href="<?= ROOT ?>/map" class="discover-btn btn align-self-center btn-outline-warning btn-lg fw-bold w-50">
-                        Discover Now
+                        Khám phá ngay
                     </a>
                 </div>
             </div>
@@ -37,41 +37,43 @@
     <!-- Feature Section -->
     <section id="features">
         <div class="container px-4 py-5" id="featured-3">
-            <h2 class="pb-2 border-bottom shadow-text">Our Features:</h2>
+            <h2 class="pb-2 border-bottom shadow-text">Chúng tôi cung cấp:</h2>
             <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
                 <div class="feature col">
                     <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
                         <i class="fa-solid fa-eye logo"></i>
                     </div>
-                    <h3 class="fs-2 text-body-emphasis">Exploration</h3>
+                    <h3 class="fs-2 text-body-emphasis">Khám phá</h3>
                     <p>
-                        Take on the journey to discover every creatures through an
-                        interactive map that unveils the incredible richness of flora
-                        and fauna in every province of Vietnam.
+                        Hãy tham gia hành trình khám phá sinh vật thông qua sự tương tác cùng bản đồ
+                        Việt Nam nhằm hé lộ sự phong phú của hệ động thực vật ở mọi tỉnh thành của
+                        Việt Nam.
                     </p>
                 </div>
                 <div class="feature col">
                     <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
                         <i class="fa-solid fa-book logo"></i>
                     </div>
-                    <h3 class="fs-2 text-body-emphasis">Education</h3>
+                    <h3 class="fs-2 text-body-emphasis">Giáo dục</h3>
                     <p>
-                        Explore and learn about the characteristics, habitat, and
-                        behavior of species living in each region of Vietnam and grasp
-                        the importance of conservation.
+                        Khám phá và tìm hiểu về đặc điểm, môi trường sống, tập tính của các loài
+                        động thực vật sống ở từng vùng miền trên đất nước Việt Nam và nắm bắt được
+                        tầm quan trọng của việc bảo tồn sinh thái.
                     </p>
                 </div>
                 <div class="feature col">
                     <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
                         <i class="fa-solid fa-repeat logo"></i>
                     </div>
-                    <h3 class="fs-2 text-body-emphasis">Revalidation</h3>
+                    <h3 class="fs-2 text-body-emphasis">Phát triển</h3>
                     <p>
-                        Join us in building a comprehensive and reliable resource to
-                        celebrates the biodiversity in Vietnam.Together, we contribute
-                        to a better understanding and conservation of our natural world.
+                        Hãy dồng hành cùng chúng tôi để xây dựng một nguồn tài nguyên toàn diện và
+                        đáng tin cậy nhằm tôn vinh vẻ đẹp và sự đa dạng sinh học ở Việt Nam. Cùng
+                        nhau góp phần nâng cao sự hiểu biết và bảo tồn thế giới tự nhiên của chúng
+                        ta.
                     </p>
                 </div>
+
             </div>
             <h2 class="border-bottom"></h2>
         </div>
@@ -81,7 +83,7 @@
     <section id="galleries">
         <div class="album py-5">
             <?php $name = $province->randomProvince() ?>
-            <h1 class="d-flex justify-content-center mb-5 shadow-text">Popular in <?= $name->name ?></h1>
+            <h1 class="d-flex justify-content-center mb-5 shadow-text">Nổi bật</h1>
             <div class="container">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 d-flex justify-content-center">
                     <?php
@@ -99,7 +101,7 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                    View
+                                                    Xem
                                                 </button>
                                             </div>
                                         </div>

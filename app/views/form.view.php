@@ -56,7 +56,7 @@
                     <label>
                         <div class="fill-in mt-1">
                             <input onchange="displayImage(this.files[0])" name="image" type="file">
-                            <label>Select Image</label>
+                            <label>Ảnh của sinh vật</label>
                         </div>
                         <div>
                             <img src="<?= get_image() ?>" class="image-preview img-thumbnail">
@@ -69,7 +69,7 @@
 
 
             <div class="fill-in my-2 d-flex justify-content-center">
-                <button class="btn btn-primary bg-success w-25">Send</button>
+                <button class="btn btn-primary bg-success w-25">Gửi</button>
             </div>
         </form>
     </div>
