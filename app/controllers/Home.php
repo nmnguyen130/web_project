@@ -11,6 +11,7 @@ class Home
     public function index()
     {
         $data['title'] = 'Home';
+        $data['province'] = new \Model\Province;
 
         $this->view('home', $data);
     }

@@ -122,13 +122,6 @@ header {
   background-size: cover;
 }
 
-.infor-img {
-  width: 280px;
-  object-fit: cover;
-  border-radius: 4px;
-  float: right;
-}
-
 .card-img-overlay {
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.4);
@@ -142,6 +135,13 @@ header {
 .card img {
   height: 200px;
   object-fit: cover;
+}
+
+.infor-img {
+  width: 280px;
+  height: auto !important;
+  border-radius: 4px;
+  float: right;
 }
 
 .custom-btn {

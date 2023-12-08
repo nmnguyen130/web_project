@@ -53,7 +53,6 @@
 		</div>
 	</div>
 
-	<script src="<?= ROOT ?>/assets/js/libs/bootstrap.bundle.min.js"></script>
 	<script src="<?= ROOT ?>/assets/js/login.js"></script>
 </body>
 

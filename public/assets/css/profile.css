@@ -79,3 +79,9 @@ main {
 .form-information.active {
   display: block;
 }
+
+#img-preview {
+  width: 280px;
+  height: auto !important;
+  border-radius: 4px;
+}

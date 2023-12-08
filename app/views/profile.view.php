@@ -20,7 +20,7 @@
         <h3 class="title">Hồ sơ cá nhân</h3>
         <div class="card">
             <div class="row">
-                <div class="col-md-3 pe-0 border-end">
+                <div class="col-md-3">
                     <div class="list-group" role="tablist">
                         <?php foreach ($tabs as $tab => $translation) : ?>
                             <a class="list-group-item list-group-item-action <?= ($active_tab === $tab) ? 'active' : ''; ?>" data-bs-toggle="tab" href="#<?= $tab ?>"><?= $translation ?></a>
@@ -85,49 +85,57 @@
                                                     <i class="fa-solid fa-angle-down"></i>
                                                 </div>
                                                 <div class="content p-2 mt-1 rounded-1 border">
-                                                    <div class="search position-relative">
-                                                        <i class="fa-solid fa-magnifying-glass position-absolute mx-2"></i>
-                                                        <input type="text" placeholder="Search" class="rounded-1 border py-2">
-                                                    </div>
-                                                    <ul class="options m-0 mt-1">
-                                                        <?php
+
+                                                    <?php
+                                                    if (!empty($nameCreature)) {
+                                                    ?>
+                                                        <div class="search position-relative">
+                                                            <i class="fa-solid fa-magnifying-glass position-absolute mx-2"></i>
+                                                            <input type="text" placeholder="Search" class="rounded-1 border py-2">
+                                                        </div>
+                                                    <?php
+                                                        echo '<ul class="options m-0 mt-1">';
                                                         foreach ($nameCreature as $creature) {
                                                             echo '<li data-id="' . $creature->id . '">' . $creature->name . ' (' . $creature->scientific_name . ')' . '</li>';
                                                         }
-                                                        ?>
-                                                    </ul>
+                                                        echo '</ul>';
+                                                    } else {
+                                                        echo '<p class="text-center my-1">No creatures available</p>';
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-information">
-                                            <div class="row py-2">
-                                                <div class="col">
-                                                    <div class="form-group d-flex align-items-center">
+                                            <div class="row">
+                                                <div class="col py-2">
+                                                    <div class="form-group d-flex align-items-center my-3">
                                                         <label class="form-label m-0 me-3">Ngày gửi:</label>
                                                         <input type="text" class="form-control w-auto" value="" disabled />
                                                     </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group d-flex align-items-center">
+                                                    <div class="form-group d-flex align-items-center my-3">
                                                         <label class="form-label m-0 me-3">Tình trạng:</label>
                                                         <input type="text" class="form-control w-auto" value="" disabled />
                                                     </div>
                                                 </div>
+                                                <div class="col py-2">
+                                                    <img src="" alt="" id="img-preview">
+                                                </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group mt-2">
                                                 <label class="form-label">Tỉnh:</label>
                                                 <input type="text" class="form-control" name="province" readonly></input>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group mt-2">
                                                 <label class="form-label">Đặc điểm:</label>
                                                 <textarea type="text" class="form-control" name="characteristic" readonly></textarea>
                                             </div>
-                                            <div class="form-group" id="behavior">
+                                            <div class="form-group mt-2" id="behavior">
                                                 <label class="form-label">Hành vi:</label>
                                                 <textarea type="text" class="form-control" name="behavior" readonly></textarea>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group mt-2">
                                                 <label class="form-label">Môi trường sống:</label>
                                                 <textarea type="text" class="form-control" name="habitat" readonly></textarea>
                                             </div>

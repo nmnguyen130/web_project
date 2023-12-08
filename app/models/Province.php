@@ -19,6 +19,13 @@ class Province
         'plant_list'
     ];
 
+    public function randomProvince()
+    {
+        $query = "SELECT name FROM $this->table ORDER BY RAND() LIMIT 1";
+
+        return $this->query($query)[0];
+    }
+
     public function getProvinces()
     {
         $query = "SELECT name FROM $this->table";
@@ -57,7 +64,7 @@ class Province
     public function getAnimalsExcept($name, $scientific_name)
     {
         $query = "
-        SELECT a.name, a.scientific_name, a.image_url
+        SELECT a.name, a.scientific_name, a.image
         FROM $this->table AS p
         JOIN animal AS a ON JSON_CONTAINS(p.animal_list, JSON_QUOTE(a.scientific_name))
         WHERE p.name = :name
@@ -75,7 +82,7 @@ class Province
     public function getPlantsExcept($name, $scientific_name)
     {
         $query = "
-        SELECT a.name, a.scientific_name, a.image_url
+        SELECT a.name, a.scientific_name, a.image
         FROM $this->table AS p
         JOIN plant AS a ON JSON_CONTAINS(p.plant_list, JSON_QUOTE(a.scientific_name))
         WHERE p.name = :name
@@ -90,7 +97,7 @@ class Province
         return $this->query($query, $data);
     }
 
-    public function randomAnimal($name)
+    public function randomAnimal($name, $limit = 1)
     {
         $query = $query = "
         SELECT a.*
@@ -98,7 +105,7 @@ class Province
         JOIN animal AS a ON JSON_CONTAINS(p.animal_list, JSON_ARRAY(a.scientific_name))
         WHERE p.name = :name
         ORDER BY RAND()
-        LIMIT 1;
+        LIMIT $limit;
     ";
 
         $data = array(':name' => $name);
@@ -106,7 +113,7 @@ class Province
         return $this->query($query, $data);
     }
 
-    public function randomPlant($name)
+    public function randomPlant($name, $limit = 1)
     {
         $query = $query = "
         SELECT a.*
@@ -114,7 +121,7 @@ class Province
         JOIN plant AS a ON JSON_CONTAINS(p.plant_list, JSON_ARRAY(a.scientific_name))
         WHERE p.name = :name
         ORDER BY RAND()
-        LIMIT 1;
+        LIMIT $limit;
     ";
 
         $data = array(':name' => $name);

@@ -41,9 +41,9 @@ class AjaxMap
 
                 $type = $post_data['type'];
                 if ($type === "animal") {
-                    $info['creature_detail'] = $animal->getAnimalByName($scientificName)[0];
+                    $info['creature_detail'] = $animal->getAnimalByName($scientificName);
                 } else if ($type === "plant") {
-                    $info['creature_detail'] = $plant->getPlantByName($scientificName)[0];
+                    $info['creature_detail'] = $plant->getPlantByName($scientificName);
                 }
             }
 
@@ -72,8 +72,7 @@ class AjaxMap
             $info['creature_province'] = $animal->getAllProvinceHasAnimal($info['creature_info']->scientific_name);
             $info['creature_list'] = $province->getAnimalsExcept($postData['provinceName'], $info['creature_info']->scientific_name);
         } elseif ($postData['functionType'] == "getDetailCreature") {
-            $animalDetail = $animal->getAnimalByName($postData['scientificName']);
-            $info['creature_detail'] = $animalDetail[0];
+            $info['creature_detail'] = $animal->getAnimalByName($postData['scientificName']);
         }
 
         return $info;
@@ -89,8 +88,7 @@ class AjaxMap
             $info['creature_province'] = $plant->getAllProvinceHasPlant($info['creature_info']->scientific_name);
             $info['creature_list'] = $province->getPlantsExcept($postData['provinceName'], $info['creature_info']->scientific_name);
         } elseif ($postData['functionType'] == "getDetailCreature") {
-            $plantDetail = $plant->getPlantByName($postData['scientificName']);
-            $info['creature_detail'] = $plantDetail[0];
+            $info['creature_detail'] = $plant->getPlantByName($postData['scientificName']);
         }
 
         return $info;

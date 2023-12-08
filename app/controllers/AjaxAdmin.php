@@ -46,6 +46,17 @@ class AjaxAdmin
                     $info['creatures'] = $plant->getAllPlant();
                 }
             }
+
+            if (isset($post_data['scientificName'])) {
+                $type = $post_data['type'];
+                if ($type === 'animal') {
+                    $animal = new \Model\Animal;
+                    $info['creature'] = $animal->getAnimalByName($post_data['scientificName']);
+                } elseif ($type === 'plant') {
+                    $plant = new \Model\Plant;
+                    $info['creature'] = $plant->getPlantByName($post_data['scientificName']);
+                }
+            }
         }
 
         header('Content-Type: application/json');

@@ -21,9 +21,28 @@
                         </div>
                     </div>
 
-                    <div class="fill-in mt-3">
-                        <input type="text" name="image_url" placeholder=" " disabled>
-                        <label>Image URL</label>
+                    <div class="row">
+                        <div class="col flex-column mt-4">
+                            <div class="fill-in mt-2">
+                                <input type="text" name="name" placeholder=" " disabled>
+                                <label>Creature name</label>
+                            </div>
+
+                            <div class="fill-in my-4">
+                                <input type="text" name="scientific_name" placeholder=" " disabled>
+                                <label>Scientific name</label>
+                            </div>
+
+                            <div class="fill-in ">
+                                <input type="text" name="province" placeholder=" " disabled>
+                                <label>Province</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="fill-in mt-3">
+                                <img class="w-100 float-end " src="" alt="">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="fill-in mt-3">

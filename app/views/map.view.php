@@ -44,7 +44,6 @@
     </div>
 </div>
 
-<script src="<?= ROOT ?>/assets/js/libs/bootstrap.bundle.min.js"></script>
 <script src="<?= ROOT ?>/assets/js/libs/raphael.min.js"></script>
 
 <script src="<?= ROOT ?>/assets/js/mapdata.js"></script>

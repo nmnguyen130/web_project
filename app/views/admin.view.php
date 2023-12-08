@@ -1,6 +1,8 @@
 <?php $this->view('includes/import', $data) ?>
 
 <link rel="stylesheet" href="<?= ROOT ?>/assets/css/admin.css">
+<script src="<?= ROOT ?>/assets/js/admin.js"></script>
+
 </head>
 
 <body>
@@ -126,24 +128,10 @@
                             </thead>
                             <tbody id="formInfor">
                                 <?php
-                                $posts = $form->getPosts();
+                                $posts = json_encode($form->getPosts());
 
-                                if (empty($posts)) :
+                                echo "<script>updatePostsTable($posts)</script>";
                                 ?>
-                                    <tr>
-                                        <td colspan="5" class="text-center">No posts available</td>
-                                    </tr>
-                                <?php else : ?>
-                                    <?php foreach ($posts as $post) : ?>
-                                        <tr>
-                                            <td><?php echo $post->username; ?></td>
-                                            <td><?php echo $post->name; ?></td>
-                                            <td><?php echo date('H:i:s d/m/Y', strtotime($post->submission_date)); ?></td>
-                                            <td><span class="status <?php echo strtolower($post->status); ?>"><?php echo $post->status; ?></span></td>
-                                            <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $post->id; ?>">View</a></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
@@ -182,23 +170,10 @@
                             </thead>
                             <tbody id="creaturesInfor">
                                 <?php
-                                $animals = $animal->getAllAnimal();
+                                $animals = json_encode($animal->getAllAnimal());
 
-                                if (empty($animals)) :
+                                echo "<script>updateCreaturesTable($animals, 'animal')</script>";
                                 ?>
-                                    <tr>
-                                        <td colspan="5">No animal available</td>
-                                    </tr>
-                                <?php else : ?>
-                                    <?php foreach ($animals as $animal) : ?>
-                                        <tr>
-                                            <td><?php echo $animal->name; ?></td>
-                                            <td><?php echo $animal->scientific_name; ?></td>
-                                            <td><?php echo date('H:i:s d/m/Y', strtotime($animal->update_date)); ?></td>
-                                            <td><a href="#" class="view-creature" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $animal->id; ?>">View</a></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
@@ -207,6 +182,3 @@
         </div>
     </main>
 </body>
-
-<script src="<?= ROOT ?>/assets/js/libs/bootstrap.bundle.min.js"></script>
-<script src="<?= ROOT ?>/assets/js/admin.js"></script>

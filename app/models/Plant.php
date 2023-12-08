@@ -14,7 +14,7 @@ class Plant
     protected $allowedColumns = [
         'scientific_name',
         'name',
-        'image_url',
+        'image',
         'red_list',
         'characteristic',
         'habitat',
@@ -40,11 +40,11 @@ class Plant
 
     public function getPlantByName($scientific_name)
     {
-        $query = "SELECT * FROM $this->table WHERE scientific_name = :scientific_name";
+        $query = "SELECT *, 'plant' as type FROM $this->table WHERE scientific_name = :scientific_name";
 
         $data = array(':scientific_name' => $scientific_name);
 
-        return $this->query($query, $data);
+        return $this->query($query, $data)[0];
     }
 
     public function getTotalPlant()

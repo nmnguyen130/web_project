@@ -79,12 +79,12 @@ const getDetailCreature = (scientific_name, creatureType = type) => {
 
 const updateCreatureInformation = (creatureInfo) => {
   currentCreature = {
-    image_url: creatureInfo.image_url,
+    image: creatureInfo.image,
     name: creatureInfo.name,
     scientific_name: creatureInfo.scientific_name,
   };
 
-  $("#image").attr("src", creatureInfo.image_url);
+  $("#image").attr("src", creatureInfo.image);
   $("#province_name, #name").text(provinceName);
   $("#name").html(
     `${creatureInfo.name} (tên khoa học: ${creatureInfo.scientific_name})`
@@ -134,7 +134,7 @@ const createCreatureCard = (creature, container) => {
   const cardDiv = $("<div>").addClass("card bg-dark text-white");
   const img = $("<img>")
     .addClass("card-img")
-    .attr("src", creature.image_url)
+    .attr("src", creature.image)
     .attr("alt", creature.name);
   const cardOverlayDiv = $("<div>").addClass("card-img-overlay");
   const title = $("<h6>")

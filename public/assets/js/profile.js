@@ -67,13 +67,15 @@ const updateInforForm = (creatureInfo) => {
   const formattedSubmissionDate = `${submissionDate.getDate()}/${
     submissionDate.getMonth() + 1
   }/${submissionDate.getFullYear()}`;
-  $(".form-information .row:eq(0) .col:eq(0) input").val(
+  $(".form-information .row:eq(0) .col:eq(0) input:eq(0)").val(
     "Ngày " + formattedSubmissionDate
   );
 
-  $(".form-information .row:eq(0) .col:eq(1) input").val(
+  $(".form-information .row:eq(0) .col:eq(0) input:eq(1)").val(
     getStatusDisplay(creatureInfo.status)
   );
+
+  $("#img-preview").attr("src", creatureInfo.image);
 
   $("input[name='province']").val(creatureInfo.provinces.join(", "));
 
