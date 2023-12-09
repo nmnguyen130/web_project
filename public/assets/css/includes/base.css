@@ -54,6 +54,10 @@ li {
   list-style: none;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Scroll Bar */
 ::-webkit-scrollbar {
   width: 8px;

@@ -62,8 +62,7 @@ class AjaxAdmin
                 } else {
                     $info['creatures'] = $creatureModel->getAllCreatures();
                 }
-            } elseif (isset($post_data['name'])) { // Check Form submit
-                $oldScientificName = $post_data['oldName'];
+            } elseif (isset($post_data['query'])) { // Check Form submit
                 $scientific_name = $post_data['scientific_name'];
                 $provinces = explode(', ', $post_data['province']);;
                 $type = $post_data['directory'];
@@ -90,6 +89,7 @@ class AjaxAdmin
                     move_uploaded_file($file['image']['tmp_name'], $folder . $new_filename);
                     $data['image'] = $folder . $new_filename;
                 }
+
                 // Update in DB
                 if ($type === 'animal') {
                     $creatureModel = new \Model\Animal;
@@ -98,13 +98,26 @@ class AjaxAdmin
                     $creatureModel = new \Model\Plant;
                 }
 
-                $creatureModel->update($scientific_name, $data, $creatureModel->primaryKey);
+                switch ($post_data['query']) {
+                    case "insert":
+                        $creatureModel->insert($data);
 
-                $province = new \Model\Province;
-                foreach ($provinces as $provinceName) {
-                    $province->changeScientificName($provinceName, $type, $oldScientificName, $scientific_name);
+                        $province = new \Model\Province;
+                        foreach ($provinces as $provinceName) {
+                            $province->insertCreature($provinceName, $type, $scientific_name);
+                        }
+                        break;
+                    case "update":
+                        $oldScientificName = $post_data['oldName'];
+
+                        $creatureModel->update($scientific_name, $data, $creatureModel->primaryKey);
+
+                        $province = new \Model\Province;
+                        foreach ($provinces as $provinceName) {
+                            $province->changeScientificName($provinceName, $type, $oldScientificName, $scientific_name);
+                        }
+                        break;
                 }
-
                 $info['creatures'] = $creatureModel->getAllCreatures();
             }
         }

@@ -149,8 +149,8 @@
             </div>
         </div>
         <div class="d-flex justify-content-end mt-3">
-            <button type="submit" id="save" class="btn bg-success text-white">Save changes</button>&nbsp;
-            <a href="<?= ROOT ?>/home" class="btn btn-warning">Cancel</a>
+            <button type="submit" id="save" class="btn bg-success text-white">Lưu thay đổi</button>&nbsp;
+            <a href="<?= ROOT ?>/home" class="btn btn-warning">Quay lại</a>
         </div>
     </div>
 </main>

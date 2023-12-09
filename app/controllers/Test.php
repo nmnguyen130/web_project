@@ -19,11 +19,13 @@ class Test
 
         // $user->insert($data);
 
-        $province = new \Model\Province;
-        $provinces = ["An Giang", "Cao Bằng"];
-        foreach ($provinces as $provinceName) {
-            $province->changeScientificName($provinceName, 'animal', "Vulpes vulpes", "Noname");
-        }
+        // $province = new \Model\Province;
+        // $provinces = ["An Giang", "Cao Bằng"];
+        // foreach ($provinces as $provinceName) {
+        //     $province->insertCreature($provinceName, 'plant', "Noname");
+        // }
+
+        $plant = new \Model\Plant;
 
         $data['title'] = 'Test';
 

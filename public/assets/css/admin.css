@@ -93,7 +93,7 @@ body {
 .content main .bottom-data {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 16px;
+  margin-top: 12px;
   width: 100%;
   color: var(--dark-color);
 }
@@ -268,4 +268,15 @@ input[type="radio"]:checked + label {
   background-color: var(--lighter-primary-color);
   color: #fff;
   border-color: var(--darker-primary-color);
+}
+
+/* Image Preview */
+.preview {
+  position: absolute;
+  display: none;
+  z-index: 100;
+}
+
+.preview img {
+  max-width: 250px;
 }

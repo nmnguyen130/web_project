@@ -1,5 +1,40 @@
 $(document).ready(() => {
   let currentAjaxRequest;
+  let type = "Animal";
+
+  $(".btn-add").on("click", function (e) {
+    e.preventDefault();
+
+    $(".the-title").text("New " + type);
+    var formElements = $('form[name="feedback-form"]').find("input, textarea");
+
+    if (type === "Animal") {
+      $("#behavior").show();
+    } else {
+      $("#behavior").hide();
+    }
+
+    $(".btn-approve, .btn-reject, .btn-delete").hide();
+    $(".btn-edit")
+      .removeClass("edit border-dark text-dark")
+      .addClass("border-success text-success");
+    $(".btn-edit").html('<i class="fa-solid fa-check pe-2"></i>Save');
+
+    formElements.prop("disabled", false);
+
+    $('form[name="feedback-form"]')
+      .off("submit")
+      .on("submit", function (e) {
+        e.preventDefault();
+
+        let formData = new FormData($(this)[0]);
+        formData.append("directory", type.toLowerCase());
+        formData.append("query", "insert");
+
+        submitCreature(formData);
+        $("#modalInfor").modal("hide");
+      });
+  });
 
   // View post modal
   $(".view-post").click(function (e) {
@@ -66,6 +101,7 @@ $(document).ready(() => {
           let formData = new FormData($(this)[0]);
           formData.append("directory", type.toLowerCase());
           formData.append("oldName", scientificName);
+          formData.append("query", "update");
 
           submitCreature(formData);
           $('form[name="feedback-form"]')
@@ -117,7 +153,7 @@ $(document).ready(() => {
       processData: false,
       contentType: false,
       success: function (response) {
-        updateCreaturesTable(response.creatures);
+        updateCreaturesTable(response.creatures, type);
       },
       complete: () => {
         currentAjaxRequest = null;
@@ -144,14 +180,14 @@ $(document).ready(() => {
   $('input[name="type"]')
     .off("change")
     .on("change", function () {
-      var selectedType = $(this).val();
+      type = $(this).val();
 
       handleAjaxRequest(
         "/ajaxAdmin",
         "POST",
-        { type: selectedType.toLowerCase() },
+        { type: type.toLowerCase() },
         function (response) {
-          updateCreaturesTable(response.creatures, selectedType);
+          updateCreaturesTable(response.creatures, type);
         }
       );
     });
@@ -177,14 +213,12 @@ $(document).ready(() => {
 function resetModal() {
   let formElements = $('form[name="feedback-form"]').find("input, textarea");
 
-  if (!$(".btn-edit").hasClass("edit")) {
-    $(".btn-edit")
-      .addClass("edit border-dark text-dark")
-      .removeClass("border-success text-success");
-    $(".btn-edit").html('<i class="fa-solid fa-wrench pe-2"></i>Edit');
+  $(".btn-edit")
+    .addClass("edit border-dark text-dark")
+    .removeClass("border-success text-success");
+  $(".btn-edit").html('<i class="fa-solid fa-wrench pe-2"></i>Edit');
 
-    formElements.prop("disabled", true);
-  }
+  formElements.prop("disabled", true);
 }
 
 function fillForm(inforForm) {
@@ -232,11 +266,11 @@ function updatePostsTable(posts) {
 
 function updateCreaturesTable(creatures, type) {
   $(".creature-title").text(type);
-
   bodyTable = $("#creaturesInfor").empty();
   if (creatures.length > 0) {
     creatures.forEach((creature) => {
-      var newRow = `<tr>
+      var newRow = `<tr class="position-relative">
+          <td class="hidden">${creature.image}</td>
           <td>${creature.name}</td>
           <td>${creature.scientific_name}</td>
           <td>${creature.update_date}</td>

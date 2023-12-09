@@ -155,9 +155,14 @@
 
                 <div class="bottom-data">
                     <div class="orders">
-                        <div class="header">
-                            <i class="fa-solid fa-clipboard-list fs-5"></i>
-                            <h3 class="m-0 creature-title"></h3>
+                        <div class="header d-flex justify-content-between">
+                            <div class="d-flex">
+                                <i class="fa-solid fa-clipboard-list fs-4 me-3"></i>
+                                <h3 class="m-0 creature-title"></h3>
+                            </div>
+                            <button type="button" class="btn-add btn border-2 border-secondary text-secondary" data-bs-toggle='modal' data-bs-target='#modalInfor'>
+                                <i class="fa-solid fa-plus px-1"></i>
+                            </button>
                         </div>
                         <table>
                             <thead>
@@ -168,12 +173,15 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="creaturesInfor">
+                            <tbody id="creaturesInfor" class="position-relative">
                                 <?php
                                 $animals = json_encode($animal->getAllCreatures());
 
                                 echo "<script>updateCreaturesTable($animals, 'Animal')</script>";
                                 ?>
+                                <div class="preview position-absolute hidden">
+                                    <img src="<?= get_image() ?>" class="img-thumbnail" />
+                                </div>
                             </tbody>
                         </table>
                     </div>
@@ -182,3 +190,38 @@
         </div>
     </main>
 </body>
+
+<script>
+    $(document).ready(() => {
+        const imgPreview = $(".preview");
+
+        function showImage(x, y, image) {
+            if (x > 3 / 4 * $("#creaturesInfor").width()) {
+                x -= imgPreview.width();
+            }
+
+            imgPreview.css({
+                left: x + "px",
+                top: y + "px"
+            });
+
+            imgPreview.find("img").attr("src", image)
+            imgPreview.css("display", "block");
+        }
+
+        function hideImage() {
+            imgPreview.css("display", "none");
+        }
+
+        $("#creaturesInfor tr").on("mousemove", function(e) {
+            var x = e.pageX - 215;
+            var y = e.pageY + 10;
+
+            showImage(x, y, $(this).find("td:eq(0)").text());
+        });
+
+        $("#creaturesInfor tr").on("mouseleave", function() {
+            hideImage();
+        });
+    });
+</script>

@@ -33,6 +33,21 @@ class Province
         return $this->query($query);
     }
 
+    public function insertCreature($provinceName, $type, $scientific_name)
+    {
+        $existingList = $this->getScientificNameList($provinceName, $type);
+        $existingList[count($existingList)] = $scientific_name;
+
+        $query = "UPDATE $this->table SET {$type}_list = :newScientificName WHERE name = :provinceName;";
+
+        $data = [
+            ':newScientificName' => json_encode($existingList),
+            ':provinceName' => $provinceName
+        ];
+
+        return $this->query($query, $data);
+    }
+
     public function changeScientificName($provinceName, $type, $old_scientific_name, $scientific_name)
     {
         $existingList = $this->getScientificNameList($provinceName, $type);
