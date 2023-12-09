@@ -5,32 +5,23 @@ $(document).ready(() => {
   $(".view-post").click(function (e) {
     e.preventDefault();
 
-    var username = $(this).closest("tr").find("td:first-child").text();
+    let username = $(this).closest("tr").find("td:first-child").text();
     $(".the-title").text("Contributed by " + username);
 
+    $('input[name="image"]').hide();
     $(".btn-edit, .btn-delete").hide();
     $(".btn-approve, .btn-reject").show();
 
-    var postId = $(this).data("post-id");
+    let postId = $(this).data("post-id");
 
-    if (currentAjaxRequest) {
-      currentAjaxRequest.abort();
-    }
-
-    currentAjaxRequest = $.ajax({
-      url: root + "/ajaxAdmin",
-      method: "POST",
-      data: {
-        value: null,
-        postId: postId,
-      },
-      success: function (response) {
+    handleAjaxRequest(
+      "/ajaxAdmin",
+      "POST",
+      { value: null, postId },
+      function (response) {
         fillForm(response.infor_form);
-      },
-      complete: () => {
-        currentAjaxRequest = null;
-      },
-    });
+      }
+    );
 
     $(".btn-approve").one("click", function (e) {
       functionBtn("approve", postId);
@@ -42,76 +33,65 @@ $(document).ready(() => {
   });
 
   // View creature modal
-  $("#creaturesInfor").on("click", ".view-creature", function (e) {
-    e.preventDefault();
+  $("#creaturesInfor")
+    .off("click", ".view-creature")
+    .on("click", ".view-creature", function (e) {
+      e.preventDefault();
 
-    $(".btn-edit, .btn-delete").show();
-    $(".btn-approve, .btn-reject").hide();
+      resetModal();
 
-    var scientificName = $(this).data("scientific-name");
-    var type = $(this).data("type");
+      $('input[name="image"]').hide();
+      $(".btn-edit, .btn-delete").show();
+      $(".btn-approve, .btn-reject").hide();
 
-    $(".the-title").text(type);
+      let scientificName = $(this).data("scientific-name");
+      let type = $(this).data("type");
 
-    if (currentAjaxRequest) {
-      currentAjaxRequest.abort();
-    }
+      $(".the-title").text(type);
 
-    currentAjaxRequest = $.ajax({
-      url: root + "/ajaxAdmin",
-      method: "POST",
-      data: {
-        scientificName: scientificName,
-        type: type.toLowerCase(),
-      },
-      success: function (response) {
-        fillForm(response.creature);
-      },
-      complete: () => {
-        currentAjaxRequest = null;
-      },
+      handleAjaxRequest(
+        "/ajaxAdmin",
+        "POST",
+        { scientificName, type: type.toLowerCase() },
+        function (response) {
+          fillForm(response.creature);
+        }
+      );
+
+      $('form[name="feedback-form"]')
+        .off("submit")
+        .on("submit", function (e) {
+          e.preventDefault();
+
+          let formData = new FormData($(this)[0]);
+          formData.append("directory", type.toLowerCase());
+          formData.append("oldName", scientificName);
+
+          submitCreature(formData);
+          $('form[name="feedback-form"]')
+            .find("input, textarea")
+            .prop("disabled", true);
+        });
+
+      $(".btn-delete")
+        .off("click")
+        .one("click", function () {
+          deleteCreature("delete", scientificName, type);
+        });
     });
-
-    $(".btn-delete").one("click", function (e) {
-      functionBtn("delete", scientificName, type);
-    });
-  });
 
   function functionBtn(value = null, postId) {
-    if (currentAjaxRequest) {
-      currentAjaxRequest.abort();
-    }
-
-    currentAjaxRequest = $.ajax({
-      url: root + "/ajaxAdmin",
-      method: "POST",
-      data: {
-        value: value,
-        postId: postId,
-      },
-      success: function () {
-        location.reload();
-      },
-      complete: () => {
-        currentAjaxRequest = null;
-      },
+    handleAjaxRequest("/ajaxAdmin", "POST", { value, postId }, function () {
+      location.reload();
     });
   }
 
-  function functionBtn(value = null, scientificName, type) {
-    if (currentAjaxRequest) {
-      currentAjaxRequest.abort();
-    }
-
-    currentAjaxRequest = $.ajax({
-      url: root + "/ajaxAdmin",
-      method: "POST",
-      data: {
-        value: value,
-        scientificName: scientificName,
-        creatureType: type,
-      },
-      success: function (response) {
+  function deleteCreature(value = null, scientificName, type) {
+    handleAjaxRequest(
+      "/ajaxAdmin",
+      "POST",
+      { value, scientificName, creatureType: type },
+      function (response) {
         $("#modalInfor").modal("hide");
         updateCreaturesTable(response.creatures, type);
 
@@ -120,6 +100,24 @@ $(document).ready(() => {
         } else {
           $(".insights li:eq(3) h3").text(response.total);
         }
+      }
+    );
+  }
+
+  function submitCreature(formData) {
+    if (currentAjaxRequest) {
+      currentAjaxRequest.abort();
+    }
+
+    currentAjaxRequest = $.ajax({
+      url: root + "/ajaxAdmin",
+      method: "POST",
+      data: formData,
+      dataType: "json",
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        updateCreaturesTable(response.creatures);
       },
       complete: () => {
         currentAjaxRequest = null;
@@ -132,47 +130,69 @@ $(document).ready(() => {
     var selectedValue = $(this).text();
     $("#statusBtn").text(selectedValue);
 
-    $.ajax({
-      url: root + "/ajaxAdmin",
-      method: "POST",
-      data: {
-        status: selectedValue.toLowerCase(),
-      },
-      success: function (response) {
+    handleAjaxRequest(
+      "/ajaxAdmin",
+      "POST",
+      { status: selectedValue.toLowerCase() },
+      function (response) {
         updatePostsTable(response.table_form);
-      },
-    });
+      }
+    );
   });
 
   // Toggle radio button Animal and Plant
-  $('input[name="type"]').change(function () {
-    var selectedType = $(this).val();
+  $('input[name="type"]')
+    .off("change")
+    .on("change", function () {
+      var selectedType = $(this).val();
 
+      handleAjaxRequest(
+        "/ajaxAdmin",
+        "POST",
+        { type: selectedType.toLowerCase() },
+        function (response) {
+          updateCreaturesTable(response.creatures, selectedType);
+        }
+      );
+    });
+
+  function handleAjaxRequest(url, method, data, successCallback) {
     if (currentAjaxRequest) {
       currentAjaxRequest.abort();
     }
 
     currentAjaxRequest = $.ajax({
-      url: root + "/ajaxAdmin",
-      method: "POST",
-      data: {
-        type: selectedType.toLowerCase(),
-      },
-      success: function (response) {
-        updateCreaturesTable(response.creatures, selectedType);
-      },
+      url: root + url,
+      method: method,
+      data: data,
+      success: successCallback,
       complete: () => {
         currentAjaxRequest = null;
       },
     });
-  });
+  }
 });
 
 // Util function
+function resetModal() {
+  let formElements = $('form[name="feedback-form"]').find("input, textarea");
+
+  if (!$(".btn-edit").hasClass("edit")) {
+    $(".btn-edit")
+      .addClass("edit border-dark text-dark")
+      .removeClass("border-success text-success");
+    $(".btn-edit").html('<i class="fa-solid fa-wrench pe-2"></i>Edit');
+
+    formElements.prop("disabled", true);
+  }
+}
+
 function fillForm(inforForm) {
   $('[name="name"]').val(inforForm.name);
   $('[name="scientific_name"]').val(inforForm.scientific_name);
+
   $("#img-preview").attr("src", inforForm.image);
+
   $('[name="province"]').val(inforForm.provinces.join(", "));
   $('[name="characteristic"]').val(inforForm.characteristic);
   if (inforForm.type === "animal") {
@@ -180,6 +200,7 @@ function fillForm(inforForm) {
     $('[name="behavior"]').val(inforForm.behavior);
   } else {
     $("#behavior").hide();
+    $('[name="behavior"]').val("");
   }
   $('[name="habitat"]').val(inforForm.habitat);
 }

@@ -66,8 +66,6 @@
                 </div>
             </div>
 
-
-
             <div class="fill-in my-2 d-flex justify-content-center">
                 <button class="btn btn-primary bg-success w-25">Gửi</button>
             </div>

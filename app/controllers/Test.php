@@ -19,6 +19,12 @@ class Test
 
         // $user->insert($data);
 
+        $province = new \Model\Province;
+        $provinces = ["An Giang", "Cao Bằng"];
+        foreach ($provinces as $provinceName) {
+            $province->changeScientificName($provinceName, 'animal', "Vulpes vulpes", "Noname");
+        }
+
         $data['title'] = 'Test';
 
         $this->view('test', $data);

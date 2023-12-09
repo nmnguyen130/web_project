@@ -33,21 +33,18 @@ class AjaxMap
                         $plant->getAllCreatures()
                     );
                 }
-            }
-
-            if (isset($post_data['searchText'])) {
+            } elseif (isset($post_data['searchText'])) {
                 $scientificName = $post_data['searchText'];
-                $info['provinces'] = $province->getAllProvinceHas($scientificName);
-
                 $type = $post_data['type'];
+
+                $info['provinces'] = $province->getAllProvinceHas($scientificName, $type);
+
                 if ($type === "animal") {
                     $info['creature_detail'] = $animal->getCreatureByName($scientificName);
                 } else if ($type === "plant") {
                     $info['creature_detail'] = $plant->getCreatureByName($scientificName);
                 }
-            }
-
-            if (isset($post_data['creatureType'])) {
+            } elseif (isset($post_data['creatureType'])) {
                 $creatureType = $post_data['creatureType'];
 
                 if ($creatureType == "animal") {
@@ -65,12 +62,13 @@ class AjaxMap
     private function handleAnimalRequest($postData, $province, $animal)
     {
         $info = [];
+        $type = "animal";
 
         if ($postData['functionType'] == "getCreatureOfProvince") {
-            $animalInfo = $province->randomAnimal($postData['provinceName']);
+            $animalInfo = $province->randomCreature($postData['provinceName'], $type);
             $info['creature_info'] = $animalInfo[0];
             $info['creature_province'] = $animal->getAllProvinceHas($info['creature_info']->scientific_name);
-            $info['creature_list'] = $province->getAnimalsExcept($postData['provinceName'], $info['creature_info']->scientific_name);
+            $info['creature_list'] = $province->getCreaturesExcept($postData['provinceName'], $info['creature_info']->scientific_name, $type);
         } elseif ($postData['functionType'] == "getDetailCreature") {
             $info['creature_detail'] = $animal->getAnimalByName($postData['scientificName']);
         }
@@ -81,12 +79,13 @@ class AjaxMap
     private function handlePlantRequest($postData, $province, $plant)
     {
         $info = [];
+        $type = "plant";
 
         if ($postData['functionType'] == "getCreatureOfProvince") {
-            $plantInfo = $province->randomPlant($postData['provinceName']);
+            $plantInfo = $province->randomCreature($postData['provinceName'], $type);
             $info['creature_info'] = $plantInfo[0];
             $info['creature_province'] = $plant->getAllProvinceHas($info['creature_info']->scientific_name);
-            $info['creature_list'] = $province->getPlantsExcept($postData['provinceName'], $info['creature_info']->scientific_name);
+            $info['creature_list'] = $province->getCreaturesExcept($postData['provinceName'], $info['creature_info']->scientific_name, $type);
         } elseif ($postData['functionType'] == "getDetailCreature") {
             $info['creature_detail'] = $plant->getPlantByName($postData['scientificName']);
         }

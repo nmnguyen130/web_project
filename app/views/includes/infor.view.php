@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form name="feedback-form" method="post" class="mx-1">
+                <form name="feedback-form" method="post" class="mx-1" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-6 col-md-7 flex-column mt-3">
                             <div class="fill-in mt-2">
@@ -29,6 +29,7 @@
 
                         <div class="col-6 col-md-5">
                             <div class="fill-in mt-3">
+                                <input onchange="displayImage(this.files[0])" name="image" type="file">
                                 <img id="img-preview" class="w-100 float-end img-thumbnail" src="<?= get_image() ?>">
                             </div>
                         </div>
@@ -49,7 +50,7 @@
                         <label>Habitat</label>
                     </div>
 
-                    <div class="fill-in mt-2 d-flex justify-content-end gap-2">
+                    <div class="fill-in mt-2 d-flex justify-content-end gap-2 btn-container">
                         <button type="button" class="btn-edit edit btn border-2 border-dark text-dark">
                             <i class="fa-solid fa-wrench pe-2"></i>Edit
                         </button>
@@ -82,15 +83,28 @@
                     .addClass("border-success text-success");
                 editBtn.html('<i class="fa-solid fa-check pe-2"></i>Save');
 
+                $('input[name="image"]').show();
                 formElements.prop("disabled", false);
+                editBtn.attr("type", "button");
             } else {
                 editBtn
                     .addClass("edit border-dark text-dark")
                     .removeClass("border-success text-success");
                 editBtn.html('<i class="fa-solid fa-wrench pe-2"></i>Edit');
 
-                formElements.prop("disabled", true);
+                $('input[name="image"]').hide();
+                editBtn.attr("type", "submit");
             }
         });
     });
+
+    function displayImage(file) {
+        let allowed = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+
+        if (!allowed.includes(file.type)) {
+            return;
+        }
+
+        $('#img-preview').attr('src', URL.createObjectURL(file));
+    }
 </script>

@@ -33,40 +33,41 @@ class Province
         return $this->query($query);
     }
 
-    public function getAllAnimal($name)
+    public function changeScientificName($provinceName, $type, $old_scientific_name, $scientific_name)
     {
-        $query = "
-        SELECT a.*
-        FROM $this->table AS p
-        JOIN animal AS a ON JSON_CONTAINS(p.animal_list, JSON_ARRAY(a.scientific_name))
-        WHERE p.name = :name;
-    ";
+        $existingList = $this->getScientificNameList($provinceName, $type);
+        // Check if the scientific name already exists
+        $key = array_search($old_scientific_name, $existingList);
+        $existingList[$key !== false ? $key : count($existingList)] = $scientific_name;
 
-        $data = array(':name' => $name);
+        $query = "UPDATE $this->table SET {$type}_list = :newScientificName WHERE name = :provinceName;";
+
+        $data = [
+            ':newScientificName' => json_encode($existingList),
+            ':provinceName' => $provinceName
+        ];
 
         return $this->query($query, $data);
     }
 
-    public function getAllPlant($name)
+    public function getAllCreature($name, $type)
     {
-        $query = "
-        SELECT a.*
-        FROM $this->table AS p
-        JOIN plant AS a ON JSON_CONTAINS(p.plant_list, JSON_ARRAY(a.scientific_name))
-        WHERE p.name = :name;
-    ";
 
-        $data = array(':name' => $name);
+        $query = "
+        SELECT a.* FROM $this->table AS p 
+        JOIN $type AS a ON JSON_CONTAINS(p.{$type}_list, JSON_ARRAY(a.scientific_name)) 
+        WHERE p.name = :name;";
+        $data = [':name' => $name];
 
         return $this->query($query, $data);
     }
 
-    public function getAnimalsExcept($name, $scientific_name)
+    public function getCreaturesExcept($name, $scientific_name, $type)
     {
         $query = "
         SELECT a.name, a.scientific_name, a.image
         FROM $this->table AS p
-        JOIN animal AS a ON JSON_CONTAINS(p.animal_list, JSON_QUOTE(a.scientific_name))
+        JOIN {$type} AS a ON JSON_CONTAINS(p.{$type}_list, JSON_QUOTE(a.scientific_name))
         WHERE p.name = :name
         AND a.scientific_name <> :scientific_name;
         ";
@@ -79,30 +80,12 @@ class Province
         return $this->query($query, $data);
     }
 
-    public function getPlantsExcept($name, $scientific_name)
-    {
-        $query = "
-        SELECT a.name, a.scientific_name, a.image
-        FROM $this->table AS p
-        JOIN plant AS a ON JSON_CONTAINS(p.plant_list, JSON_QUOTE(a.scientific_name))
-        WHERE p.name = :name
-        AND a.scientific_name <> :scientific_name;
-        ";
-
-        $data = [
-            ':name' => $name,
-            ':scientific_name' => $scientific_name
-        ];
-
-        return $this->query($query, $data);
-    }
-
-    public function randomAnimal($name, $limit = 1)
+    public function randomCreature($name, $type, $limit = 1)
     {
         $query = $query = "
         SELECT a.*
         FROM $this->table AS p
-        JOIN animal AS a ON JSON_CONTAINS(p.animal_list, JSON_ARRAY(a.scientific_name))
+        JOIN {$type} AS a ON JSON_CONTAINS(p.{$type}_list, JSON_ARRAY(a.scientific_name))
         WHERE p.name = :name
         ORDER BY RAND()
         LIMIT $limit;
@@ -113,33 +96,37 @@ class Province
         return $this->query($query, $data);
     }
 
-    public function randomPlant($name, $limit = 1)
-    {
-        $query = $query = "
-        SELECT a.*
-        FROM $this->table AS p
-        JOIN plant AS a ON JSON_CONTAINS(p.plant_list, JSON_ARRAY(a.scientific_name))
-        WHERE p.name = :name
-        ORDER BY RAND()
-        LIMIT $limit;
-    ";
-
-        $data = array(':name' => $name);
-
-        return $this->query($query, $data);
-    }
-
-    public function getAllProvinceHas($scientificName)
+    public function getAllProvinceHas($scientificName, $type)
     {
         $query = "
         SELECT p.name
         FROM $this->table AS p
-        WHERE JSON_CONTAINS(p.animal_list, JSON_ARRAY(:scientific_name))
-           OR JSON_CONTAINS(p.plant_list, JSON_ARRAY(:scientific_name));
+        WHERE JSON_CONTAINS(p.{$type}_list, JSON_ARRAY(:scientific_name));
     ";
 
         $data = [':scientific_name' => $scientificName];
 
         return $this->query($query, $data);
+    }
+
+    private function getScientificNameList($provinceName, $type)
+    {
+        $query = "
+        SELECT {$type}_list
+        FROM $this->table
+        WHERE name = :provinceName
+    ";
+
+        $data = [
+            ':provinceName' => $provinceName,
+        ];
+
+        $result = $this->query($query, $data);
+
+        if ($result && isset($result[0]->{$type . '_list'})) {
+            return json_decode($result[0]->{$type . '_list'}, true);
+        }
+
+        return [];
     }
 }

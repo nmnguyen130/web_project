@@ -87,7 +87,7 @@
             <div class="container">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 d-flex justify-content-center">
                     <?php
-                    $animals = $province->randomAnimal($name->name, 6);
+                    $animals = $province->randomCreature($name->name, 6, 'animal');
                     foreach ($animals as $animal) {
                     ?>
                         <div class="col d-flex">
