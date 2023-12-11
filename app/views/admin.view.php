@@ -80,11 +80,11 @@
                                 <?php else : ?>
                                     <?php foreach ($recentPosts as $post) : ?>
                                         <tr>
-                                            <td><?php echo $post->username; ?></td>
-                                            <td><?php echo $post->name; ?></td>
-                                            <td><?php echo date('H:i:s d/m/Y', strtotime($post->submission_date)); ?></td>
-                                            <td><span class="status <?php echo strtolower($post->status); ?>"><?php echo $post->status; ?></span></td>
-                                            <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?php echo $post->id; ?>">View</a></td>
+                                            <td><?= $post->username; ?></td>
+                                            <td><?= $post->name; ?></td>
+                                            <td><?= date('H:i:s d/m/Y', strtotime($post->submission_date)); ?></td>
+                                            <td><span class="status <?= strtolower($post->status); ?>"><?= $post->status; ?></span></td>
+                                            <td><a href="#" class="view-post" data-bs-toggle="modal" data-bs-target="#modalInfor" data-post-id="<?= $post->id; ?>" data-post-type="<?= $post->type ?>">View</a></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
@@ -175,7 +175,7 @@
                             </thead>
                             <tbody id="creaturesInfor" class="position-relative">
                                 <?php
-                                $animals = json_encode($animal->getAllCreatures());
+                                $animals = json_encode($animal->getAllCreatures("animal"));
 
                                 echo "<script>updateCreaturesTable($animals, 'Animal')</script>";
                                 ?>
@@ -196,10 +196,6 @@
         const imgPreview = $(".preview");
 
         function showImage(x, y, image) {
-            if (x > 3 / 4 * $("#creaturesInfor").width()) {
-                x -= imgPreview.width();
-            }
-
             imgPreview.css({
                 left: x + "px",
                 top: y + "px"
@@ -213,14 +209,22 @@
             imgPreview.css("display", "none");
         }
 
-        $("#creaturesInfor tr").on("mousemove", function(e) {
+        $("#creaturesInfor").on("mousemove", "tr", function(e) {
             var x = e.pageX - 215;
             var y = e.pageY + 10;
+            console.log(y, e.pageY)
+
+            if (x > 3 / 4 * $("#creaturesInfor").width()) {
+                x -= imgPreview.width();
+            }
+            if (y > $("#creaturesInfor").height() - imgPreview.height()) {
+                y -= imgPreview.height();
+            }
 
             showImage(x, y, $(this).find("td:eq(0)").text());
         });
 
-        $("#creaturesInfor tr").on("mouseleave", function() {
+        $("#creaturesInfor").on("mouseleave", "tr", function() {
             hideImage();
         });
     });

@@ -22,10 +22,8 @@ class Test
         // $province = new \Model\Province;
         // $provinces = ["An Giang", "Cao Bằng"];
         // foreach ($provinces as $provinceName) {
-        //     $province->insertCreature($provinceName, 'plant', "Noname");
+        //     $province->insertCreature($provinceName, 'plant', "Không biết");
         // }
-
-        $plant = new \Model\Plant;
 
         $data['title'] = 'Test';
 

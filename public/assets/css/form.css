@@ -2,6 +2,12 @@ header {
   background-color: var(--dark-color);
 }
 
+@media screen and (max-width: 991px) {
+  .navbar-collapse {
+    background-color: var(--dark-color);
+  }
+}
+
 .form-container {
   margin-top: 56px;
 }

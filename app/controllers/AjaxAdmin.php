@@ -35,7 +35,7 @@ class AjaxAdmin
                         $creatureModel = ($type === 'Animal') ? new \Model\Animal : new \Model\Plant;
                         $creatureModel->delete($scientificName, $creatureModel->primaryKey);
 
-                        $info['creatures'] = $creatureModel->getAllCreatures();
+                        $info['creatures'] = $creatureModel->getAllCreatures($type);
                         $info['total'] = $creatureModel->getTotal();
                         break;
                     default:
@@ -55,12 +55,12 @@ class AjaxAdmin
 
                 if (isset($post_data['scientificName'])) {
                     $scientificName = $post_data['scientificName'];
-                    $provinces = array_column($creatureModel->getAllProvinceHas($scientificName), 'name');
+                    $provinces = array_column($creatureModel->getAllProvinceHas($scientificName, $type), 'name');
 
-                    $info['creature'] = $creatureModel->getCreatureByName($scientificName);
+                    $info['creature'] = $creatureModel->getCreatureByName($scientificName, $type);
                     $info['creature']->provinces = $provinces;
                 } else {
-                    $info['creatures'] = $creatureModel->getAllCreatures();
+                    $info['creatures'] = $creatureModel->getAllCreatures($type);
                 }
             } elseif (isset($post_data['query'])) { // Check Form submit
                 $scientific_name = $post_data['scientific_name'];
@@ -75,19 +75,34 @@ class AjaxAdmin
                     'update_date' => date('Y-m-d H:i:s')
                 ];
 
-                $file = $req->files();
-                if (!empty($file['image']['name'])) {
-                    $file_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                if (!empty($post_data['image_path'])) {
+                    $file_name = basename($post_data['image_path']);
+                    $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
                     $new_filename = str_replace(' ', '_', $scientific_name) .  '.' . $file_extension;
 
                     $folder = "creature/" . $type . "/";
+                    $new_path = $folder . $new_filename;
 
-                    if (file_exists($folder . $new_filename)) {
-                        unlink($folder . $new_filename);
+                    if (!file_exists($new_path)) {
+                        copy($post_data['image_path'], $new_path);
                     }
 
-                    move_uploaded_file($file['image']['tmp_name'], $folder . $new_filename);
-                    $data['image'] = $folder . $new_filename;
+                    $data['image'] = $new_path;
+                } else {
+                    $file = $req->files();
+                    if (!empty($file['image']['name'])) {
+                        $file_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                        $new_filename = str_replace(' ', '_', $scientific_name) .  '.' . $file_extension;
+
+                        $folder = "creature/" . $type . "/";
+
+                        if (file_exists($folder . $new_filename)) {
+                            unlink($folder . $new_filename);
+                        }
+
+                        move_uploaded_file($file['image']['tmp_name'], $folder . $new_filename);
+                        $data['image'] = $folder . $new_filename;
+                    }
                 }
 
                 // Update in DB
@@ -118,7 +133,7 @@ class AjaxAdmin
                         }
                         break;
                 }
-                $info['creatures'] = $creatureModel->getAllCreatures();
+                $info['creatures'] = $creatureModel->getAllCreatures($type);
             }
         }
 

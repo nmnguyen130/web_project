@@ -3,7 +3,7 @@
 }
 
 .header.active {
-  background: var(--dark-color);
+  background-color: var(--dark-color);
 }
 
 .navbar .navbar-brand .logo {
@@ -29,5 +29,14 @@
 @media screen and (max-width: 991px) {
   .navbar .navbar-nav .nav-item > a {
     float: right;
+  }
+
+  .dropdown-menu {
+    left: auto !important;
+    right: 0;
+  }
+
+  .header.active .navbar-collapse {
+    background-color: var(--dark-color);
   }
 }

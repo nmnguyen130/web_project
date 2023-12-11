@@ -68,9 +68,6 @@ const getDetailCreature = (scientific_name, creatureType = type) => {
 
       updateCreatureInformation(creatureInfo);
     },
-    error: function (xhr, status, error) {
-      console.error("Error in getDetailCreature:", status, error);
-    },
     complete: () => {
       currentAjaxRequest = null;
     },
@@ -111,6 +108,10 @@ const updateProvinceList = (provinceHasCreature) => {
       const provinceValue = $(e.target).text();
       zoomToProvince(provinceValue);
       sendData(provinceValue);
+
+      $(".custom-btn").removeClass("btn-primary btn-secondary");
+      $("." + type + "-btn").addClass("btn-secondary");
+      $(".custom-btn:not(." + type + "-btn)").addClass("btn-primary");
     });
 };
 

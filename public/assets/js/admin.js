@@ -48,6 +48,7 @@ $(document).ready(() => {
     $(".btn-approve, .btn-reject").show();
 
     let postId = $(this).data("post-id");
+    let type = $(this).data("post-type");
 
     handleAjaxRequest(
       "/ajaxAdmin",
@@ -59,12 +60,29 @@ $(document).ready(() => {
     );
 
     $(".btn-approve").one("click", function (e) {
-      functionBtn("approve", postId);
+      let form = $('form[name="feedback-form"]');
+      form.find("input, textarea").prop("disabled", false);
+
+      form.submit();
     });
 
     $(".btn-reject").one("click", function (e) {
       functionBtn("reject", postId);
     });
+
+    $('form[name="feedback-form"]')
+      .off("submit")
+      .on("submit", function (e) {
+        e.preventDefault();
+
+        let formData = new FormData($(this)[0]);
+        formData.append("directory", type.toLowerCase());
+        formData.append("query", "insert");
+
+        submitCreature(formData);
+
+        functionBtn("approve", postId);
+      });
   });
 
   // View creature modal
@@ -155,6 +173,9 @@ $(document).ready(() => {
       success: function (response) {
         updateCreaturesTable(response.creatures, type);
       },
+      error: function (xhr, status, error) {
+        console.error("AJAX request failed:", xhr, status, error);
+      },
       complete: () => {
         currentAjaxRequest = null;
       },
@@ -225,6 +246,7 @@ function fillForm(inforForm) {
   $('[name="name"]').val(inforForm.name);
   $('[name="scientific_name"]').val(inforForm.scientific_name);
 
+  $('[name="image_path"]').val(inforForm.image);
   $("#img-preview").attr("src", inforForm.image);
 
   $('[name="province"]').val(inforForm.provinces.join(", "));
@@ -252,7 +274,7 @@ function updatePostsTable(posts) {
       }</span></td>
             <td><a href='#' class='view-post' data-bs-toggle='modal' data-bs-target='#modalInfor' data-post-id='${
               post.id
-            }'>View</a></td>
+            }' data-post-type='${post.type}'>View</a></td>
         </tr>`;
 
       bodyTable.append(newRow);

@@ -41,7 +41,7 @@ class Province
         $query = "UPDATE $this->table SET {$type}_list = :newScientificName WHERE name = :provinceName;";
 
         $data = [
-            ':newScientificName' => json_encode($existingList),
+            ':newScientificName' => json_encode($existingList, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             ':provinceName' => $provinceName
         ];
 
@@ -58,7 +58,7 @@ class Province
         $query = "UPDATE $this->table SET {$type}_list = :newScientificName WHERE name = :provinceName;";
 
         $data = [
-            ':newScientificName' => json_encode($existingList),
+            ':newScientificName' => json_encode($existingList, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             ':provinceName' => $provinceName
         ];
 

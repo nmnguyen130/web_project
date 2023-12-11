@@ -1,5 +1,12 @@
 $(document).ready(() => {
-  var creatures;
+  let creatures;
+
+  const storedName = sessionStorage.getItem("name");
+
+  if (storedName) {
+    findProvinces(storedName, "animal");
+    sessionStorage.removeItem("name");
+  }
 
   $(".search-icon").click(function () {
     clickOnSearch();
@@ -34,7 +41,7 @@ $(document).ready(() => {
     var scientificName = $(this).data("scientific-name");
     var type = $(this).data("type");
 
-    findProvines(scientificName, type);
+    findProvinces(scientificName, type);
   });
 
   $("#search-input").on("input", function () {
@@ -72,7 +79,7 @@ $(document).ready(() => {
     });
   }
 
-  function findProvines(scientificName, type) {
+  function findProvinces(scientificName, type) {
     $.ajax({
       url: root + "/ajaxMap",
       method: "POST",
@@ -92,6 +99,7 @@ $(document).ready(() => {
         updateProvinceList(response.provinces);
 
         clickOnSearch();
+        $(".search-bar").removeClass("bar-show");
       },
     });
   }

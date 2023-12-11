@@ -100,14 +100,13 @@
                                         </p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                <a href="<?= ROOT ?>/map" class="btn btn-sm btn-outline-secondary" id="viewMap" onclick="passName('<?= $animal->scientific_name ?>')">
                                                     Xem
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     <?php
@@ -120,3 +119,9 @@
 </main>
 
 <?php $this->view('includes/footer', $data) ?>
+
+<script>
+    function passName(name) {
+        sessionStorage.setItem("name", name);
+    }
+</script>

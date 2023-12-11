@@ -29,6 +29,7 @@
 
                         <div class="col-6 col-md-5">
                             <div class="fill-in mt-3">
+                                <input type="hidden" name="image_path">
                                 <input onchange="displayImage(this.files[0])" name="image" type="file">
                                 <img id="img-preview" class="w-100 float-end img-thumbnail" src="<?= get_image() ?>">
                             </div>
@@ -72,9 +73,9 @@
 
 <script>
     $(document).ready(() => {
-        var editBtn = $(".btn-edit");
-        var form = $('form[name="feedback-form"]');
-        var formElements = form.find("input, textarea");
+        let editBtn = $(".btn-edit");
+        let form = $('form[name="feedback-form"]');
+        let formElements = form.find("input, textarea");
 
         editBtn.on("click", () => {
             if (editBtn.hasClass("edit")) {
@@ -107,4 +108,17 @@
 
         $('#img-preview').attr('src', URL.createObjectURL(file));
     }
+
+    $('[name="image"]').change(function() {
+        let input = this;
+        let path = $('[name="image_path"]');
+
+        if (input.files && input.files[0]) {
+            let render = new FileReader();
+            render.onload = function(e) {
+                path.val("");
+            }
+            render.readAsDataURL(input.files[0]);
+        }
+    });
 </script>
