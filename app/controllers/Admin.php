@@ -16,6 +16,11 @@ class Admin
         $data['animal'] = new \Model\Animal;
         $data['plant'] = new \Model\Plant;
 
-        $this->view('admin', $data);
+        $ses = new \Core\Session;
+        if ($ses->user('role') === "admin") {
+            $this->view('admin', $data);
+        } else {
+            $this->view('404', $data);
+        }
     }
 }
